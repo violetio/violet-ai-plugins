@@ -1,0 +1,10 @@
+{
+  "name": "platform-bigcommerce",
+  "version": "1.0.0",
+  "description": "BigCommerce API patterns and enterprise features",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}

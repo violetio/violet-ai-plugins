@@ -1,0 +1,10 @@
+{
+  "name": "domain-ecom-integrations",
+  "version": "1.0.0",
+  "description": "Ecommerce integration patterns and decomposer/composer",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}

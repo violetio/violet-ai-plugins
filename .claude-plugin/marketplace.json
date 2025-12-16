@@ -1,0 +1,181 @@
+{
+  "name": "violet",
+  "owner": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "metadata": {
+    "description": "Internal Claude Code plugins for Violet",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "agents",
+      "source": "./plugins/agents",
+      "description": "All role personas: engineering, PM, CS, finance, legal, brand",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agents", "personas", "roles"]
+    },
+    {
+      "name": "stack-java-spring",
+      "source": "./plugins/stack-java-spring",
+      "description": "Java/Spring Boot conventions for Violet services",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["java", "spring", "kafka", "temporal"]
+    },
+    {
+      "name": "stack-python",
+      "source": "./plugins/stack-python",
+      "description": "Python conventions for SDKs and MCP servers",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["python", "pydantic", "asyncio"]
+    },
+    {
+      "name": "stack-typescript-react",
+      "source": "./plugins/stack-typescript-react",
+      "description": "TypeScript/React conventions for dashboards",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["typescript", "react", "redux", "mui"]
+    },
+    {
+      "name": "stack-nextjs",
+      "source": "./plugins/stack-nextjs",
+      "description": "Next.js conventions for VioletDashboard and Connect",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["nextjs", "ssr", "react"]
+    },
+    {
+      "name": "domain-prism",
+      "source": "./plugins/domain-prism",
+      "description": "Prism checkout orchestration context",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["prism", "checkout", "payments"]
+    },
+    {
+      "name": "domain-beam",
+      "source": "./plugins/domain-beam",
+      "description": "Beam dropshipping and product sync context",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["beam", "dropshipping", "products"]
+    },
+    {
+      "name": "domain-relay",
+      "source": "./plugins/domain-relay",
+      "description": "Relay events and notifications context",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["relay", "events", "kafka", "notifications"]
+    },
+    {
+      "name": "domain-track-and-field",
+      "source": "./plugins/domain-track-and-field",
+      "description": "Track & Field affiliate tracking context",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["tracking", "affiliate", "attribution"]
+    },
+    {
+      "name": "domain-open-commerce",
+      "source": "./plugins/domain-open-commerce",
+      "description": "Open Commerce MCP and AI operations context",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["mcp", "ai", "natural-language"]
+    },
+    {
+      "name": "domain-ecom-integrations",
+      "source": "./plugins/domain-ecom-integrations",
+      "description": "Ecommerce integration patterns and decomposer/composer",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["integrations", "decomposer", "composer"]
+    },
+    {
+      "name": "platform-shopify",
+      "source": "./plugins/platform-shopify",
+      "description": "Shopify API patterns, GraphQL, webhooks",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["shopify", "graphql", "webhooks"]
+    },
+    {
+      "name": "platform-bigcommerce",
+      "source": "./plugins/platform-bigcommerce",
+      "description": "BigCommerce API patterns and enterprise features",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["bigcommerce", "enterprise"]
+    },
+    {
+      "name": "platform-woocommerce",
+      "source": "./plugins/platform-woocommerce",
+      "description": "WooCommerce API and WordPress integration patterns",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["woocommerce", "wordpress"]
+    },
+    {
+      "name": "platform-rithum",
+      "source": "./plugins/platform-rithum",
+      "description": "Rithum B2B patterns and distribution API",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["rithum", "b2b", "distribution"]
+    },
+    {
+      "name": "platform-squarespace",
+      "source": "./plugins/platform-squarespace",
+      "description": "Squarespace API and design system integration",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["squarespace", "design"]
+    },
+    {
+      "name": "skill-security",
+      "source": "./plugins/skill-security",
+      "description": "Security fundamentals and best practices",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["security", "privacy", "compliance"]
+    },
+    {
+      "name": "skill-testing",
+      "source": "./plugins/skill-testing",
+      "description": "Testing patterns, pyramid, TDD",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["testing", "tdd", "coverage"]
+    },
+    {
+      "name": "skill-observability",
+      "source": "./plugins/skill-observability",
+      "description": "Logging, tracing, metrics fundamentals",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["observability", "logging", "metrics"]
+    },
+    {
+      "name": "skill-documentation",
+      "source": "./plugins/skill-documentation",
+      "description": "Documentation standards and patterns",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["documentation", "api-docs"]
+    },
+    {
+      "name": "workflows",
+      "source": "./plugins/workflows",
+      "description": "Process patterns: git, 9D framework, product discovery, review gates",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["git", "9d", "discovery", "gates"]
+    }
+  ]
+}

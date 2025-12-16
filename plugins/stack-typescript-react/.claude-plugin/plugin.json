@@ -1,0 +1,10 @@
+{
+  "name": "stack-typescript-react",
+  "version": "1.0.0",
+  "description": "TypeScript/React conventions for dashboards",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}

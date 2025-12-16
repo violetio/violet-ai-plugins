@@ -1,0 +1,10 @@
+{
+  "name": "platform-woocommerce",
+  "version": "1.0.0",
+  "description": "WooCommerce API and WordPress integration patterns",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}

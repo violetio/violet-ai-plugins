@@ -1,0 +1,10 @@
+{
+  "name": "domain-prism",
+  "version": "1.0.0",
+  "description": "Prism checkout orchestration context",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}

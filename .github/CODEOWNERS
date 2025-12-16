@@ -1,0 +1,8 @@
+# Plugin marketplace maintainers must approve all changes to the catalog
+/.claude-plugin/ @violetio/eng-leads
+
+# Plugin structure changes require review
+**/plugin.json @violetio/eng-leads
+
+# Contributing guidelines
+/CONTRIBUTING.md @violetio/eng-leads

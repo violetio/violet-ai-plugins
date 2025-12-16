@@ -1,0 +1,10 @@
+{
+  "name": "skill-observability",
+  "version": "1.0.0",
+  "description": "Logging, tracing, metrics fundamentals",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}

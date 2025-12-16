@@ -1,0 +1,10 @@
+{
+  "name": "agents",
+  "version": "1.0.0",
+  "description": "All role personas: engineering, PM, CS, finance, legal, brand",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "agents": ["./agents/"]
+}

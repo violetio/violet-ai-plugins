@@ -1,0 +1,10 @@
+{
+  "name": "stack-python",
+  "version": "1.0.0",
+  "description": "Python conventions for SDKs and MCP servers",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}

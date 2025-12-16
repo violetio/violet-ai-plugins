@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [],
+    "deny": []
+  },
+  "extraKnownMarketplaces": {
+    "violet": {
+      "source": {
+        "source": "github",
+        "repo": "violetio/violet-plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "agents@violet": true,
+    "workflows@violet": true,
+    "skill-security@violet": true,
+    "skill-testing@violet": true,
+    "stack-typescript-react@violet": true,
+    "stack-nextjs@violet": true
+  }
+}
