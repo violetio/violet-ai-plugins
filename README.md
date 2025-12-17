@@ -20,20 +20,53 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 /plugin
 
 # Install a plugin
-/plugin install agents@violet
+/plugin install agent-backend-engineer@violet
 
 # Uninstall
-/plugin uninstall agents
+/plugin uninstall agent-backend-engineer
 ```
 
-## Available Plugins (21)
+## Available Plugins (46)
 
-### Agents (1)
+### Agents (22)
+
 | Plugin | Description |
 |--------|-------------|
-| `agents` | All role personas: engineering, PM, CS, finance, legal, brand |
+| `agent-architect` | System architecture and technical design |
+| `agent-backend-engineer` | Server-side implementation and APIs |
+| `agent-brand-guidelines` | Brand voice and visual identity guidelines |
+| `agent-commerce-pm` | Commerce product management |
+| `agent-contract-analyst` | Contract review and legal analysis |
+| `agent-customer-docs-agent` | Customer-facing documentation |
+| `agent-customer-success` | Customer success and relationship management |
+| `agent-data-engineer` | Data pipelines and analytics infrastructure |
+| `agent-experience-designer` | UX/UI design and user experience |
+| `agent-finance-analyst` | Financial analysis and reporting |
+| `agent-finance-engineer` | Financial systems and cost engineering |
+| `agent-frontend-engineer` | Frontend implementation and UI |
+| `agent-infrastructure-engineer` | Infrastructure, DevOps, and platform reliability |
+| `agent-internal-docs-agent` | Internal documentation and knowledge base |
+| `agent-onboarding-agent` | Customer onboarding specialist |
+| `agent-partnership-manager` | Partnership development and management |
+| `agent-platform-pm` | Platform product management |
+| `agent-project-coordinator` | Project coordination and task management |
+| `agent-qa-engineer` | Quality assurance and testing |
+| `agent-security-privacy` | Security and privacy engineering |
+| `agent-support-agent` | Customer support and issue resolution |
+| `agent-tech-lead` | Technical leadership and code review |
+
+### Workflows (5)
+
+| Plugin | Description |
+|--------|-------------|
+| `workflow-9d-framework` | 9D product development framework |
+| `workflow-conversation-management` | Conversation phases, topic drift, and convo-exit protocols |
+| `workflow-git-conventions` | Git workflow and commit conventions |
+| `workflow-product-discovery` | Product discovery and validation process |
+| `workflow-review-gates` | Quality gates and review processes |
 
 ### Stack (4)
+
 | Plugin | Description |
 |--------|-------------|
 | `stack-java-spring` | Java/Spring Boot conventions |
@@ -42,6 +75,7 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 | `stack-nextjs` | Next.js conventions |
 
 ### Domain (6)
+
 | Plugin | Description |
 |--------|-------------|
 | `domain-prism` | Prism checkout orchestration |
@@ -52,6 +86,7 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 | `domain-ecom-integrations` | Integration patterns |
 
 ### Platform (5)
+
 | Plugin | Description |
 |--------|-------------|
 | `platform-shopify` | Shopify API patterns |
@@ -61,6 +96,7 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 | `platform-squarespace` | Squarespace API patterns |
 
 ### Skills (4)
+
 | Plugin | Description |
 |--------|-------------|
 | `skill-security` | Security fundamentals |
@@ -68,27 +104,27 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 | `skill-observability` | Logging, tracing, metrics |
 | `skill-documentation` | Documentation standards |
 
-### Workflows (1)
-| Plugin | Description |
-|--------|-------------|
-| `workflows` | Git, 9D framework, product discovery, review gates, conversation management |
-
 ## Usage Examples
 
 ### Engineering Project (Java/Beam/Shopify)
 ```json
 {
-  "extraKnownMarketplaces": {
-    "violet": { "source": { "source": "github", "repo": "violetio/violet-ai-plugins" }}
-  },
-  "enabledPlugins": {
-    "agents@violet": true,
-    "workflows@violet": true,
-    "skill-security@violet": true,
-    "skill-testing@violet": true,
-    "stack-java-spring@violet": true,
-    "domain-beam@violet": true,
-    "platform-shopify@violet": true
+  "plugins": {
+    "marketplace": {
+      "source": "https://raw.githubusercontent.com/violetio/violet-ai-plugins/main/.claude-plugin/marketplace.json"
+    },
+    "installed": [
+      "agent-backend-engineer",
+      "agent-architect",
+      "agent-tech-lead",
+      "workflow-git-conventions",
+      "workflow-conversation-management",
+      "skill-security",
+      "skill-testing",
+      "stack-java-spring",
+      "domain-beam",
+      "platform-shopify"
+    ]
   }
 }
 ```
@@ -96,11 +132,19 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 ### Product Brain (PM work)
 ```json
 {
-  "enabledPlugins": {
-    "agents@violet": true,
-    "workflows@violet": true,
-    "skill-documentation@violet": true,
-    "domain-prism@violet": true
+  "plugins": {
+    "marketplace": {
+      "source": "https://raw.githubusercontent.com/violetio/violet-ai-plugins/main/.claude-plugin/marketplace.json"
+    },
+    "installed": [
+      "agent-commerce-pm",
+      "agent-experience-designer",
+      "workflow-9d-framework",
+      "workflow-product-discovery",
+      "workflow-conversation-management",
+      "skill-documentation",
+      "domain-prism"
+    ]
   }
 }
 ```

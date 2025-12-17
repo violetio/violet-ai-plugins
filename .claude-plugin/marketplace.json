@@ -10,12 +10,220 @@
   },
   "plugins": [
     {
-      "name": "agents",
-      "source": "./plugins/agents",
-      "description": "All role personas: engineering, PM, CS, finance, legal, brand",
+      "name": "agent-architect",
+      "source": "./plugins/agent-architect",
+      "description": "System architecture and technical design",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agents", "personas", "roles"]
+      "keywords": ["agent", "architecture", "design"]
+    },
+    {
+      "name": "agent-backend-engineer",
+      "source": "./plugins/agent-backend-engineer",
+      "description": "Server-side implementation and APIs",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "backend", "api"]
+    },
+    {
+      "name": "agent-brand-guidelines",
+      "source": "./plugins/agent-brand-guidelines",
+      "description": "Brand voice and visual identity guidelines",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "brand", "marketing"]
+    },
+    {
+      "name": "agent-commerce-pm",
+      "source": "./plugins/agent-commerce-pm",
+      "description": "Commerce product management",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "product", "commerce"]
+    },
+    {
+      "name": "agent-contract-analyst",
+      "source": "./plugins/agent-contract-analyst",
+      "description": "Contract review and legal analysis",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "legal", "contracts"]
+    },
+    {
+      "name": "agent-customer-docs-agent",
+      "source": "./plugins/agent-customer-docs-agent",
+      "description": "Customer-facing documentation",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "docs", "customer"]
+    },
+    {
+      "name": "agent-customer-success",
+      "source": "./plugins/agent-customer-success",
+      "description": "Customer success and relationship management",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "customer", "success"]
+    },
+    {
+      "name": "agent-data-engineer",
+      "source": "./plugins/agent-data-engineer",
+      "description": "Data pipelines and analytics infrastructure",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "data", "analytics"]
+    },
+    {
+      "name": "agent-experience-designer",
+      "source": "./plugins/agent-experience-designer",
+      "description": "UX/UI design and user experience",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "ux", "design"]
+    },
+    {
+      "name": "agent-finance-analyst",
+      "source": "./plugins/agent-finance-analyst",
+      "description": "Financial analysis and reporting",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "finance", "analysis"]
+    },
+    {
+      "name": "agent-finance-engineer",
+      "source": "./plugins/agent-finance-engineer",
+      "description": "Financial systems and cost engineering",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "finance", "engineering"]
+    },
+    {
+      "name": "agent-frontend-engineer",
+      "source": "./plugins/agent-frontend-engineer",
+      "description": "Frontend implementation and UI",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "frontend", "ui"]
+    },
+    {
+      "name": "agent-infrastructure-engineer",
+      "source": "./plugins/agent-infrastructure-engineer",
+      "description": "Infrastructure, DevOps, and platform reliability",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "infrastructure", "devops"]
+    },
+    {
+      "name": "agent-internal-docs-agent",
+      "source": "./plugins/agent-internal-docs-agent",
+      "description": "Internal documentation and knowledge base",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "docs", "internal"]
+    },
+    {
+      "name": "agent-onboarding-agent",
+      "source": "./plugins/agent-onboarding-agent",
+      "description": "Customer onboarding specialist",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "onboarding", "customer"]
+    },
+    {
+      "name": "agent-partnership-manager",
+      "source": "./plugins/agent-partnership-manager",
+      "description": "Partnership development and management",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "partnerships", "business"]
+    },
+    {
+      "name": "agent-platform-pm",
+      "source": "./plugins/agent-platform-pm",
+      "description": "Platform product management",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "product", "platform"]
+    },
+    {
+      "name": "agent-project-coordinator",
+      "source": "./plugins/agent-project-coordinator",
+      "description": "Project coordination and task management",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "project", "coordination"]
+    },
+    {
+      "name": "agent-qa-engineer",
+      "source": "./plugins/agent-qa-engineer",
+      "description": "Quality assurance and testing",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "qa", "testing"]
+    },
+    {
+      "name": "agent-security-privacy",
+      "source": "./plugins/agent-security-privacy",
+      "description": "Security and privacy engineering",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "security", "privacy"]
+    },
+    {
+      "name": "agent-support-agent",
+      "source": "./plugins/agent-support-agent",
+      "description": "Customer support and issue resolution",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "support", "customer"]
+    },
+    {
+      "name": "agent-tech-lead",
+      "source": "./plugins/agent-tech-lead",
+      "description": "Technical leadership and code review",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "tech-lead", "review"]
+    },
+    {
+      "name": "workflow-9d-framework",
+      "source": "./plugins/workflow-9d-framework",
+      "description": "9D product development framework",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["workflow", "9d", "product"]
+    },
+    {
+      "name": "workflow-conversation-management",
+      "source": "./plugins/workflow-conversation-management",
+      "description": "Conversation phases, topic drift, and convo-exit protocols",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["workflow", "conversation", "exit"]
+    },
+    {
+      "name": "workflow-git-conventions",
+      "source": "./plugins/workflow-git-conventions",
+      "description": "Git workflow and commit conventions",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["workflow", "git", "commits"]
+    },
+    {
+      "name": "workflow-product-discovery",
+      "source": "./plugins/workflow-product-discovery",
+      "description": "Product discovery and validation process",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["workflow", "discovery", "validation"]
+    },
+    {
+      "name": "workflow-review-gates",
+      "source": "./plugins/workflow-review-gates",
+      "description": "Quality gates and review processes",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["workflow", "gates", "review"]
     },
     {
       "name": "stack-java-spring",
@@ -168,14 +376,6 @@
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
       "keywords": ["documentation", "api-docs"]
-    },
-    {
-      "name": "workflows",
-      "source": "./plugins/workflows",
-      "description": "Process patterns: git, 9D framework, product discovery, review gates",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["git", "9d", "discovery", "gates"]
     }
   ]
 }
