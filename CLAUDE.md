@@ -247,6 +247,7 @@ Example: `/v-convo:start`, `/v-convo:exit`
 |--------|---------|
 | `v-plugin-dev` | Create plugins following patterns |
 | `v-plugin-test` | Validate plugins before deployment |
+| `v-plugins` | Manage plugins in consuming projects |
 | `v-feedback` | Gather and act on feedback |
 
 ### Conversation Management
@@ -262,6 +263,46 @@ Example: `/v-convo:start`, `/v-convo:exit`
 | Plugin | Purpose |
 |--------|---------|
 | `v-assistant` | Daily routines, task management |
+
+---
+
+## Plugin Management
+
+Use the `v-plugins` plugin to manage plugins in your projects.
+
+### Management Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/v-plugins-list` | List all enabled plugins in the current project |
+| `/v-plugins-status` | Compare local plugins against marketplace, identify issues |
+| `/v-plugins-update` | Fix outdated plugin names in settings.json |
+| `/v-plugins-commands` | Show available v-plugins commands |
+
+### Naming Convention
+
+All plugins use `v-*` naming. Old naming conventions are deprecated:
+
+| Old Pattern | New Pattern |
+|-------------|-------------|
+| `agent-*@violet` | `v-*@violet` |
+| `workflow-*@violet` | `v-*@violet` |
+| `domain-*@violet` | `v-*@violet` |
+| `platform-*@violet` | `v-*@violet` |
+| `skill-*@violet` | `v-*@violet` |
+| `stack-*@violet` | `v-*@violet` |
+
+### Quick Fix
+
+If your plugins aren't working, run:
+```
+/v-plugins-status
+```
+
+Then fix issues with:
+```
+/v-plugins-update
+```
 
 ---
 

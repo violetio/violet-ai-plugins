@@ -186,6 +186,14 @@
       "keywords": ["plugin", "testing"]
     },
     {
+      "name": "v-plugins",
+      "source": "./plugins/v-plugins",
+      "description": "Plugin management commands for violet-ai-plugins",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["plugin", "management", "tools"]
+    },
+    {
       "name": "v-qa",
       "source": "./plugins/v-qa",
       "description": "Quality assurance and testing",

@@ -1,0 +1,11 @@
+{
+  "name": "v-plugins",
+  "version": "1.0.0",
+  "description": "Plugin management commands for violet-ai-plugins",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "commands": ["./commands/"],
+  "knowledge": ["./knowledge/"]
+}
