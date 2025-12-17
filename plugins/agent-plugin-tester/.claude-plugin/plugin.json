@@ -1,10 +1,9 @@
 {
   "name": "agent-plugin-tester",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validate and test plugins before deployment",
   "author": {
     "name": "Violet Platform Team",
     "email": "platform@violet.io"
-  },
-  "knowledge": ["./knowledge/"]
+  }
 }

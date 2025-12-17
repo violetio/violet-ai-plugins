@@ -1,10 +1,9 @@
 {
   "name": "platform-squarespace",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Squarespace API and design system integration",
   "author": {
     "name": "Violet Platform Team",
     "email": "platform@violet.io"
-  },
-  "knowledge": ["./knowledge/"]
+  }
 }

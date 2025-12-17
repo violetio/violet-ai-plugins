@@ -1,10 +1,9 @@
 {
   "name": "stack-java-spring",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Java/Spring Boot conventions for Violet services",
   "author": {
     "name": "Violet Platform Team",
     "email": "platform@violet.io"
-  },
-  "knowledge": ["./knowledge/"]
+  }
 }

@@ -1,1 +1,9 @@
-{"name": "agent-customer-success", "version": "1.0.0", "description": "Customer success and relationship management", "author": {"name": "Violet Platform Team", "email": "platform@violet.io"}, "knowledge": ["./knowledge/"]}
+{
+  "name": "agent-customer-success",
+  "version": "1.0.1",
+  "description": "Customer success and relationship management",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

@@ -1,1 +1,9 @@
-{"name": "agent-experience-designer", "version": "1.0.0", "description": "UX/UI design and user experience", "author": {"name": "Violet Platform Team", "email": "platform@violet.io"}, "knowledge": ["./knowledge/"]}
+{
+  "name": "agent-experience-designer",
+  "version": "1.0.1",
+  "description": "UX/UI design and user experience",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

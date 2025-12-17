@@ -1,10 +1,9 @@
 {
   "name": "domain-beam",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Beam dropshipping and product sync context",
   "author": {
     "name": "Violet Platform Team",
     "email": "platform@violet.io"
-  },
-  "knowledge": ["./knowledge/"]
+  }
 }

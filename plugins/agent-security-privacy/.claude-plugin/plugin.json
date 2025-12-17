@@ -1,1 +1,9 @@
-{"name": "agent-security-privacy", "version": "1.0.0", "description": "Security and privacy engineering", "author": {"name": "Violet Platform Team", "email": "platform@violet.io"}, "knowledge": ["./knowledge/"]}
+{
+  "name": "agent-security-privacy",
+  "version": "1.0.1",
+  "description": "Security and privacy engineering",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

@@ -1,1 +1,9 @@
-{"name": "agent-platform-pm", "version": "1.0.0", "description": "Platform product management", "author": {"name": "Violet Platform Team", "email": "platform@violet.io"}, "knowledge": ["./knowledge/"]}
+{
+  "name": "agent-platform-pm",
+  "version": "1.0.1",
+  "description": "Platform product management",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

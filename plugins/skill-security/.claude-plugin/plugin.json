@@ -1,10 +1,9 @@
 {
   "name": "skill-security",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Security fundamentals and best practices",
   "author": {
     "name": "Violet Platform Team",
     "email": "platform@violet.io"
-  },
-  "knowledge": ["./knowledge/"]
+  }
 }

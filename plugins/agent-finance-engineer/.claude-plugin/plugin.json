@@ -1,1 +1,9 @@
-{"name": "agent-finance-engineer", "version": "1.0.0", "description": "Financial systems and cost engineering", "author": {"name": "Violet Platform Team", "email": "platform@violet.io"}, "knowledge": ["./knowledge/"]}
+{
+  "name": "agent-finance-engineer",
+  "version": "1.0.1",
+  "description": "Financial systems and cost engineering",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

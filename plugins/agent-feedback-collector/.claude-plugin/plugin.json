@@ -1,10 +1,9 @@
 {
   "name": "agent-feedback-collector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Systematically gather, organize, and act on user feedback",
   "author": {
     "name": "Violet Platform Team",
     "email": "platform@violet.io"
-  },
-  "knowledge": ["./knowledge/"]
+  }
 }

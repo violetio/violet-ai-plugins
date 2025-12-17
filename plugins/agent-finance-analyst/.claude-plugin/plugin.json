@@ -1,1 +1,9 @@
-{"name": "agent-finance-analyst", "version": "1.0.0", "description": "Financial analysis and reporting", "author": {"name": "Violet Platform Team", "email": "platform@violet.io"}, "knowledge": ["./knowledge/"]}
+{
+  "name": "agent-finance-analyst",
+  "version": "1.0.1",
+  "description": "Financial analysis and reporting",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}
