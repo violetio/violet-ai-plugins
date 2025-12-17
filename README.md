@@ -26,7 +26,7 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 /plugin uninstall agent-backend-engineer
 ```
 
-## Available Plugins (52)
+## Available Plugins (53)
 
 ### Agents (26)
 
@@ -80,7 +80,7 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 | `stack-typescript-react` | TypeScript/React conventions |
 | `stack-nextjs` | Next.js conventions |
 
-### Domain (6)
+### Domain (7)
 
 | Plugin | Description |
 |--------|-------------|
@@ -90,6 +90,7 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 | `domain-track-and-field` | Affiliate tracking |
 | `domain-open-commerce` | MCP and AI operations |
 | `domain-ecom-integrations` | Integration patterns |
+| `domain-violet-dashboard` | VioletDashboard code patterns |
 
 ### Platform (5)
 

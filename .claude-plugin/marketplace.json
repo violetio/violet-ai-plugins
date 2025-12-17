@@ -362,6 +362,14 @@
       "keywords": ["integrations", "decomposer", "composer"]
     },
     {
+      "name": "domain-violet-dashboard",
+      "source": "./plugins/domain-violet-dashboard",
+      "description": "VioletDashboard code patterns and conventions",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["dashboard", "redux", "nextjs", "patterns"]
+    },
+    {
       "name": "platform-shopify",
       "source": "./plugins/platform-shopify",
       "description": "Shopify API patterns, GraphQL, webhooks",
