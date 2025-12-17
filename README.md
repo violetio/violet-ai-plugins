@@ -26,9 +26,9 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 /plugin uninstall agent-backend-engineer
 ```
 
-## Available Plugins (46)
+## Available Plugins (52)
 
-### Agents (22)
+### Agents (26)
 
 | Plugin | Description |
 |--------|-------------|
@@ -54,13 +54,19 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 | `agent-security-privacy` | Security and privacy engineering |
 | `agent-support-agent` | Customer support and issue resolution |
 | `agent-tech-lead` | Technical leadership and code review |
+| `agent-plugin-developer` | Create and maintain Claude Code plugins |
+| `agent-plugin-tester` | Validate and test plugins before deployment |
+| `agent-feedback-collector` | Systematically gather and act on user feedback |
+| `agent-assistant` | Personal assistant for daily routines and productivity |
 
-### Workflows (5)
+### Workflows (7)
 
 | Plugin | Description |
 |--------|-------------|
 | `workflow-9d-framework` | 9D product development framework |
-| `workflow-conversation-management` | Conversation phases, topic drift, and convo-exit protocols |
+| `workflow-convo-start` | Conversation start protocols for understanding and alignment |
+| `workflow-convo-capture` | Mid-conversation context capture for continuity |
+| `workflow-convo-exit` | Conversation exit protocol for debrief and improvement |
 | `workflow-git-conventions` | Git workflow and commit conventions |
 | `workflow-product-discovery` | Product discovery and validation process |
 | `workflow-review-gates` | Quality gates and review processes |

@@ -1,0 +1,10 @@
+{
+  "name": "workflow-convo-capture",
+  "version": "1.0.0",
+  "description": "Mid-conversation context capture for continuity and handoff",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}

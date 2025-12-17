@@ -186,6 +186,38 @@
       "keywords": ["agent", "tech-lead", "review"]
     },
     {
+      "name": "agent-plugin-developer",
+      "source": "./plugins/agent-plugin-developer",
+      "description": "Create and maintain Claude Code plugins following established patterns",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "plugin", "meta"]
+    },
+    {
+      "name": "agent-plugin-tester",
+      "source": "./plugins/agent-plugin-tester",
+      "description": "Validate and test plugins before deployment",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "plugin", "testing", "meta"]
+    },
+    {
+      "name": "agent-feedback-collector",
+      "source": "./plugins/agent-feedback-collector",
+      "description": "Systematically gather, organize, and act on user feedback",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "feedback", "improvement"]
+    },
+    {
+      "name": "agent-assistant",
+      "source": "./plugins/agent-assistant",
+      "description": "Personal assistant for daily routines, task management, and productivity",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["agent", "assistant", "productivity", "routines"]
+    },
+    {
       "name": "workflow-9d-framework",
       "source": "./plugins/workflow-9d-framework",
       "description": "9D product development framework",
@@ -196,10 +228,34 @@
     {
       "name": "workflow-conversation-management",
       "source": "./plugins/workflow-conversation-management",
-      "description": "Conversation phases, topic drift, and convo-exit protocols",
+      "description": "[DEPRECATED: Use convo-start, convo-capture, convo-exit] Conversation phases, topic drift, and convo-exit protocols",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "conversation", "exit"]
+      "keywords": ["workflow", "conversation", "exit", "deprecated"]
+    },
+    {
+      "name": "workflow-convo-start",
+      "source": "./plugins/workflow-convo-start",
+      "description": "Conversation start protocols for understanding and alignment",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["workflow", "conversation", "start", "alignment"]
+    },
+    {
+      "name": "workflow-convo-capture",
+      "source": "./plugins/workflow-convo-capture",
+      "description": "Mid-conversation context capture for continuity and handoff",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["workflow", "conversation", "capture", "context"]
+    },
+    {
+      "name": "workflow-convo-exit",
+      "source": "./plugins/workflow-convo-exit",
+      "description": "Conversation exit protocol for debrief and continuous improvement",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["workflow", "conversation", "exit", "debrief"]
     },
     {
       "name": "workflow-git-conventions",

@@ -1,0 +1,10 @@
+{
+  "name": "agent-plugin-developer",
+  "version": "1.0.0",
+  "description": "Create and maintain Claude Code plugins following established patterns",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}

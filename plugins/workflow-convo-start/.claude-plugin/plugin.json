@@ -1,0 +1,10 @@
+{
+  "name": "workflow-convo-start",
+  "version": "1.0.0",
+  "description": "Conversation start protocols for understanding and alignment",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "knowledge": ["./knowledge/"]
+}
