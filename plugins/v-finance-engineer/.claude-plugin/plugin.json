@@ -1,0 +1,9 @@
+{
+  "name": "v-finance-engineer",
+  "version": "1.0.1",
+  "description": "Financial systems and cost engineering",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

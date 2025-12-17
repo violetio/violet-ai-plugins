@@ -1,0 +1,9 @@
+{
+  "name": "v-discovery",
+  "version": "1.0.1",
+  "description": "Product discovery and validation process",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

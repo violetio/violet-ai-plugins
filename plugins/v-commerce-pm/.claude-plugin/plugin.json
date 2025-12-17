@@ -1,0 +1,9 @@
+{
+  "name": "v-commerce-pm",
+  "version": "1.0.1",
+  "description": "Commerce product management",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

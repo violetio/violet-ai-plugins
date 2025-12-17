@@ -1,9 +1,0 @@
-{
-  "name": "agent-internal-docs-agent",
-  "version": "1.0.1",
-  "description": "Internal documentation and knowledge base",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "name": "agent-architect",
-  "version": "1.0.1",
-  "description": "System architecture and technical design",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

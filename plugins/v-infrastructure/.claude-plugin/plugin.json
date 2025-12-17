@@ -1,0 +1,9 @@
+{
+  "name": "v-infrastructure",
+  "version": "1.0.1",
+  "description": "Infrastructure, DevOps, and platform reliability",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

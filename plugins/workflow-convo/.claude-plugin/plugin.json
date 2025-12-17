@@ -1,9 +1,0 @@
-{
-  "name": "workflow-convo",
-  "version": "1.0.0",
-  "description": "Conversation lifecycle management - start, capture, and exit protocols",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

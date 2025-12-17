@@ -1,0 +1,9 @@
+{
+  "name": "v-track-and-field",
+  "version": "1.0.1",
+  "description": "Track & Field affiliate tracking context",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

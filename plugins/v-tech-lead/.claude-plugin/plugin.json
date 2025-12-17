@@ -1,0 +1,9 @@
+{
+  "name": "v-tech-lead",
+  "version": "1.0.1",
+  "description": "Technical leadership and code review",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

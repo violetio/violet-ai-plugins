@@ -1,0 +1,9 @@
+{
+  "name": "v-observability",
+  "version": "1.0.1",
+  "description": "Logging, tracing, metrics fundamentals",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

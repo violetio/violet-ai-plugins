@@ -1,0 +1,9 @@
+{
+  "name": "v-dashboard",
+  "version": "1.0.1",
+  "description": "VioletDashboard code patterns and conventions",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

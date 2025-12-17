@@ -1,9 +1,0 @@
-{
-  "name": "agent-frontend-engineer",
-  "version": "1.0.1",
-  "description": "Frontend implementation and UI",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

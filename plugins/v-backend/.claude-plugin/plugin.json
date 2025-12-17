@@ -1,0 +1,9 @@
+{
+  "name": "v-backend",
+  "version": "1.0.1",
+  "description": "Server-side implementation and APIs",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

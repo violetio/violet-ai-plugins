@@ -1,9 +1,0 @@
-{
-  "name": "agent-project-coordinator",
-  "version": "1.0.1",
-  "description": "Project coordination and task management",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

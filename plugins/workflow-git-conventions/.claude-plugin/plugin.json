@@ -1,9 +1,0 @@
-{
-  "name": "workflow-git-conventions",
-  "version": "1.0.1",
-  "description": "Git workflow and commit conventions",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

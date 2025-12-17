@@ -1,0 +1,9 @@
+{
+  "name": "v-designer",
+  "version": "1.0.1",
+  "description": "UX/UI design and user experience",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

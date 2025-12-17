@@ -1,9 +1,0 @@
-{
-  "name": "agent-data-engineer",
-  "version": "1.0.1",
-  "description": "Data pipelines and analytics infrastructure",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

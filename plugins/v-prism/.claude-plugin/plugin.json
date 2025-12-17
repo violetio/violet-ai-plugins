@@ -1,0 +1,9 @@
+{
+  "name": "v-prism",
+  "version": "1.0.1",
+  "description": "Prism checkout orchestration context",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

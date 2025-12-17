@@ -1,9 +1,0 @@
-{
-  "name": "agent-onboarding-agent",
-  "version": "1.0.1",
-  "description": "Customer onboarding specialist",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

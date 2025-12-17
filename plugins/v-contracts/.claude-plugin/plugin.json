@@ -1,0 +1,9 @@
+{
+  "name": "v-contracts",
+  "version": "1.0.1",
+  "description": "Contract review and legal analysis",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "v-qa",
+  "version": "1.0.1",
+  "description": "Quality assurance and testing",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

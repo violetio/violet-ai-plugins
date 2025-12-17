@@ -1,0 +1,9 @@
+{
+  "name": "v-rithum",
+  "version": "1.0.1",
+  "description": "Rithum B2B patterns and distribution API",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

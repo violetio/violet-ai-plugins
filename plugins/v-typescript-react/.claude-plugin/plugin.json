@@ -1,0 +1,9 @@
+{
+  "name": "v-typescript-react",
+  "version": "1.0.1",
+  "description": "TypeScript/React conventions for dashboards",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

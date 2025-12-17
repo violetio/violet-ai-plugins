@@ -1,9 +1,0 @@
-{
-  "name": "skill-testing",
-  "version": "1.0.1",
-  "description": "Testing patterns, pyramid, TDD",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

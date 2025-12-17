@@ -1,0 +1,9 @@
+{
+  "name": "v-nextjs",
+  "version": "1.0.1",
+  "description": "Next.js conventions for VioletDashboard and Connect",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

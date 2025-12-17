@@ -1,0 +1,9 @@
+{
+  "name": "v-relay",
+  "version": "1.0.1",
+  "description": "Relay events and notifications context",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

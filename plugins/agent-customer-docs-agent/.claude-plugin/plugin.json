@@ -1,9 +1,0 @@
-{
-  "name": "agent-customer-docs-agent",
-  "version": "1.0.1",
-  "description": "Customer-facing documentation",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

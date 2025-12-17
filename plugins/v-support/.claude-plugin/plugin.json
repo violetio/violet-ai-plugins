@@ -1,0 +1,9 @@
+{
+  "name": "v-support",
+  "version": "1.0.1",
+  "description": "Customer support and issue resolution",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

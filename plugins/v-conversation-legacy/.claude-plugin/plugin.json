@@ -1,0 +1,9 @@
+{
+  "name": "v-conversation-legacy",
+  "version": "1.0.1",
+  "description": "Conversation phases, topic drift, and convo-exit protocols",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

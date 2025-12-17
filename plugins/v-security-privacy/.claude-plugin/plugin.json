@@ -1,0 +1,9 @@
+{
+  "name": "v-security-privacy",
+  "version": "1.0.1",
+  "description": "Security and privacy engineering",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

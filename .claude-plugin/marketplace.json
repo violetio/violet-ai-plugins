@@ -5,425 +5,425 @@
     "email": "platform@violet.io"
   },
   "metadata": {
-    "description": "Internal Claude Code plugins for Violet",
-    "version": "1.0.0"
+    "description": "Claude Code plugins for Violet",
+    "version": "2.0.0"
   },
   "plugins": [
     {
-      "name": "agent-architect",
-      "source": "./plugins/agent-architect",
+      "name": "v-architect",
+      "source": "./plugins/v-architect",
       "description": "System architecture and technical design",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "architecture", "design"]
+      "keywords": ["architecture", "design"]
     },
     {
-      "name": "agent-backend-engineer",
-      "source": "./plugins/agent-backend-engineer",
+      "name": "v-assistant",
+      "source": "./plugins/v-assistant",
+      "description": "Personal assistant for daily routines and productivity",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["assistant", "productivity"]
+    },
+    {
+      "name": "v-backend",
+      "source": "./plugins/v-backend",
       "description": "Server-side implementation and APIs",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "backend", "api"]
+      "keywords": ["backend", "api"]
     },
     {
-      "name": "agent-brand-guidelines",
-      "source": "./plugins/agent-brand-guidelines",
+      "name": "v-brand",
+      "source": "./plugins/v-brand",
       "description": "Brand voice and visual identity guidelines",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "brand", "marketing"]
+      "keywords": ["brand", "marketing"]
     },
     {
-      "name": "agent-commerce-pm",
-      "source": "./plugins/agent-commerce-pm",
+      "name": "v-commerce-pm",
+      "source": "./plugins/v-commerce-pm",
       "description": "Commerce product management",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "product", "commerce"]
+      "keywords": ["product", "commerce"]
     },
     {
-      "name": "agent-contract-analyst",
-      "source": "./plugins/agent-contract-analyst",
+      "name": "v-contracts",
+      "source": "./plugins/v-contracts",
       "description": "Contract review and legal analysis",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "legal", "contracts"]
+      "keywords": ["legal", "contracts"]
     },
     {
-      "name": "agent-customer-docs-agent",
-      "source": "./plugins/agent-customer-docs-agent",
-      "description": "Customer-facing documentation",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "docs", "customer"]
-    },
-    {
-      "name": "agent-customer-success",
-      "source": "./plugins/agent-customer-success",
-      "description": "Customer success and relationship management",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "customer", "success"]
-    },
-    {
-      "name": "agent-data-engineer",
-      "source": "./plugins/agent-data-engineer",
-      "description": "Data pipelines and analytics infrastructure",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "data", "analytics"]
-    },
-    {
-      "name": "agent-experience-designer",
-      "source": "./plugins/agent-experience-designer",
-      "description": "UX/UI design and user experience",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "ux", "design"]
-    },
-    {
-      "name": "agent-finance-analyst",
-      "source": "./plugins/agent-finance-analyst",
-      "description": "Financial analysis and reporting",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "finance", "analysis"]
-    },
-    {
-      "name": "agent-finance-engineer",
-      "source": "./plugins/agent-finance-engineer",
-      "description": "Financial systems and cost engineering",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "finance", "engineering"]
-    },
-    {
-      "name": "agent-frontend-engineer",
-      "source": "./plugins/agent-frontend-engineer",
-      "description": "Frontend implementation and UI",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "frontend", "ui"]
-    },
-    {
-      "name": "agent-infrastructure-engineer",
-      "source": "./plugins/agent-infrastructure-engineer",
-      "description": "Infrastructure, DevOps, and platform reliability",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "infrastructure", "devops"]
-    },
-    {
-      "name": "agent-internal-docs-agent",
-      "source": "./plugins/agent-internal-docs-agent",
-      "description": "Internal documentation and knowledge base",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "docs", "internal"]
-    },
-    {
-      "name": "agent-onboarding-agent",
-      "source": "./plugins/agent-onboarding-agent",
-      "description": "Customer onboarding specialist",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "onboarding", "customer"]
-    },
-    {
-      "name": "agent-partnership-manager",
-      "source": "./plugins/agent-partnership-manager",
-      "description": "Partnership development and management",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "partnerships", "business"]
-    },
-    {
-      "name": "agent-platform-pm",
-      "source": "./plugins/agent-platform-pm",
-      "description": "Platform product management",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "product", "platform"]
-    },
-    {
-      "name": "agent-project-coordinator",
-      "source": "./plugins/agent-project-coordinator",
+      "name": "v-coordinator",
+      "source": "./plugins/v-coordinator",
       "description": "Project coordination and task management",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "project", "coordination"]
+      "keywords": ["project", "coordination"]
     },
     {
-      "name": "agent-qa-engineer",
-      "source": "./plugins/agent-qa-engineer",
-      "description": "Quality assurance and testing",
+      "name": "v-customer-docs",
+      "source": "./plugins/v-customer-docs",
+      "description": "Customer-facing documentation",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "qa", "testing"]
+      "keywords": ["docs", "customer"]
     },
     {
-      "name": "agent-security-privacy",
-      "source": "./plugins/agent-security-privacy",
-      "description": "Security and privacy engineering",
+      "name": "v-customer-success",
+      "source": "./plugins/v-customer-success",
+      "description": "Customer success and relationship management",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "security", "privacy"]
+      "keywords": ["customer", "success"]
     },
     {
-      "name": "agent-support-agent",
-      "source": "./plugins/agent-support-agent",
-      "description": "Customer support and issue resolution",
+      "name": "v-data-engineer",
+      "source": "./plugins/v-data-engineer",
+      "description": "Data pipelines and analytics infrastructure",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "support", "customer"]
+      "keywords": ["data", "analytics"]
     },
     {
-      "name": "agent-tech-lead",
-      "source": "./plugins/agent-tech-lead",
-      "description": "Technical leadership and code review",
+      "name": "v-designer",
+      "source": "./plugins/v-designer",
+      "description": "UX/UI design and user experience",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "tech-lead", "review"]
+      "keywords": ["ux", "design"]
     },
     {
-      "name": "agent-plugin-developer",
-      "source": "./plugins/agent-plugin-developer",
-      "description": "Create and maintain Claude Code plugins following established patterns",
+      "name": "v-feedback",
+      "source": "./plugins/v-feedback",
+      "description": "Gather, organize, and act on user feedback",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "plugin", "meta"]
+      "keywords": ["feedback", "improvement"]
     },
     {
-      "name": "agent-plugin-tester",
-      "source": "./plugins/agent-plugin-tester",
+      "name": "v-finance-analyst",
+      "source": "./plugins/v-finance-analyst",
+      "description": "Financial analysis and reporting",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["finance", "analysis"]
+    },
+    {
+      "name": "v-finance-engineer",
+      "source": "./plugins/v-finance-engineer",
+      "description": "Financial systems and cost engineering",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["finance", "engineering"]
+    },
+    {
+      "name": "v-frontend",
+      "source": "./plugins/v-frontend",
+      "description": "Frontend implementation and UI",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["frontend", "ui"]
+    },
+    {
+      "name": "v-infrastructure",
+      "source": "./plugins/v-infrastructure",
+      "description": "Infrastructure, DevOps, and platform reliability",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["infrastructure", "devops"]
+    },
+    {
+      "name": "v-internal-docs",
+      "source": "./plugins/v-internal-docs",
+      "description": "Internal documentation and knowledge base",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["docs", "internal"]
+    },
+    {
+      "name": "v-onboarding",
+      "source": "./plugins/v-onboarding",
+      "description": "Customer onboarding specialist",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["onboarding", "customer"]
+    },
+    {
+      "name": "v-partnerships",
+      "source": "./plugins/v-partnerships",
+      "description": "Partnership development and management",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["partnerships", "business"]
+    },
+    {
+      "name": "v-platform-pm",
+      "source": "./plugins/v-platform-pm",
+      "description": "Platform product management",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["product", "platform"]
+    },
+    {
+      "name": "v-plugin-dev",
+      "source": "./plugins/v-plugin-dev",
+      "description": "Create and maintain Claude Code plugins",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["plugin", "meta"]
+    },
+    {
+      "name": "v-plugin-test",
+      "source": "./plugins/v-plugin-test",
       "description": "Validate and test plugins before deployment",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "plugin", "testing", "meta"]
+      "keywords": ["plugin", "testing"]
     },
     {
-      "name": "agent-feedback-collector",
-      "source": "./plugins/agent-feedback-collector",
-      "description": "Systematically gather, organize, and act on user feedback",
+      "name": "v-qa",
+      "source": "./plugins/v-qa",
+      "description": "Quality assurance and testing",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "feedback", "improvement"]
+      "keywords": ["qa", "testing"]
     },
     {
-      "name": "agent-assistant",
-      "source": "./plugins/agent-assistant",
-      "description": "Personal assistant for daily routines, task management, and productivity",
+      "name": "v-security-privacy",
+      "source": "./plugins/v-security-privacy",
+      "description": "Security and privacy engineering",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["agent", "assistant", "productivity", "routines"]
+      "keywords": ["security", "privacy"]
     },
     {
-      "name": "workflow-9d-framework",
-      "source": "./plugins/workflow-9d-framework",
+      "name": "v-support",
+      "source": "./plugins/v-support",
+      "description": "Customer support and issue resolution",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["support", "customer"]
+    },
+    {
+      "name": "v-tech-lead",
+      "source": "./plugins/v-tech-lead",
+      "description": "Technical leadership and code review",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["tech-lead", "review"]
+    },
+    {
+      "name": "v-9d",
+      "source": "./plugins/v-9d",
       "description": "9D product development framework",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "9d", "product"]
+      "keywords": ["9d", "product", "framework"]
     },
     {
-      "name": "workflow-conversation-management",
-      "source": "./plugins/workflow-conversation-management",
-      "description": "[DEPRECATED: Use convo-start, convo-capture, convo-exit] Conversation phases, topic drift, and convo-exit protocols",
+      "name": "v-convo",
+      "source": "./plugins/v-convo",
+      "description": "Conversation lifecycle - start, capture, and exit",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "conversation", "exit", "deprecated"]
+      "keywords": ["conversation", "start", "capture", "exit"]
     },
     {
-      "name": "workflow-convo",
-      "source": "./plugins/workflow-convo",
-      "description": "Conversation lifecycle management - start, capture, and exit protocols",
+      "name": "v-conversation-legacy",
+      "source": "./plugins/v-conversation-legacy",
+      "description": "[DEPRECATED] Use v-convo instead",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "conversation", "start", "capture", "exit"]
+      "keywords": ["deprecated"]
     },
     {
-      "name": "workflow-git-conventions",
-      "source": "./plugins/workflow-git-conventions",
-      "description": "Git workflow and commit conventions",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "git", "commits"]
-    },
-    {
-      "name": "workflow-product-discovery",
-      "source": "./plugins/workflow-product-discovery",
+      "name": "v-discovery",
+      "source": "./plugins/v-discovery",
       "description": "Product discovery and validation process",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "discovery", "validation"]
+      "keywords": ["discovery", "validation"]
     },
     {
-      "name": "workflow-review-gates",
-      "source": "./plugins/workflow-review-gates",
+      "name": "v-gates",
+      "source": "./plugins/v-gates",
       "description": "Quality gates and review processes",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "gates", "review"]
+      "keywords": ["gates", "review"]
     },
     {
-      "name": "stack-java-spring",
-      "source": "./plugins/stack-java-spring",
-      "description": "Java/Spring Boot conventions for Violet services",
+      "name": "v-git",
+      "source": "./plugins/v-git",
+      "description": "Git workflow and commit conventions",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["java", "spring", "kafka", "temporal"]
+      "keywords": ["git", "commits"]
     },
     {
-      "name": "stack-python",
-      "source": "./plugins/stack-python",
-      "description": "Python conventions for SDKs and MCP servers",
+      "name": "v-java-spring",
+      "source": "./plugins/v-java-spring",
+      "description": "Java/Spring Boot conventions",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["python", "pydantic", "asyncio"]
+      "keywords": ["java", "spring"]
     },
     {
-      "name": "stack-typescript-react",
-      "source": "./plugins/stack-typescript-react",
-      "description": "TypeScript/React conventions for dashboards",
+      "name": "v-nextjs",
+      "source": "./plugins/v-nextjs",
+      "description": "Next.js conventions",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["typescript", "react", "redux", "mui"]
+      "keywords": ["nextjs", "react"]
     },
     {
-      "name": "stack-nextjs",
-      "source": "./plugins/stack-nextjs",
-      "description": "Next.js conventions for VioletDashboard and Connect",
+      "name": "v-python",
+      "source": "./plugins/v-python",
+      "description": "Python conventions for SDKs and MCP",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["nextjs", "ssr", "react"]
+      "keywords": ["python"]
     },
     {
-      "name": "domain-prism",
-      "source": "./plugins/domain-prism",
-      "description": "Prism checkout orchestration context",
+      "name": "v-typescript-react",
+      "source": "./plugins/v-typescript-react",
+      "description": "TypeScript/React conventions",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["prism", "checkout", "payments"]
+      "keywords": ["typescript", "react"]
     },
     {
-      "name": "domain-beam",
-      "source": "./plugins/domain-beam",
-      "description": "Beam dropshipping and product sync context",
+      "name": "v-beam",
+      "source": "./plugins/v-beam",
+      "description": "Beam dropshipping and product sync",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["beam", "dropshipping", "products"]
+      "keywords": ["beam", "dropshipping"]
     },
     {
-      "name": "domain-relay",
-      "source": "./plugins/domain-relay",
-      "description": "Relay events and notifications context",
+      "name": "v-dashboard",
+      "source": "./plugins/v-dashboard",
+      "description": "VioletDashboard code patterns",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["relay", "events", "kafka", "notifications"]
+      "keywords": ["dashboard", "redux"]
     },
     {
-      "name": "domain-track-and-field",
-      "source": "./plugins/domain-track-and-field",
-      "description": "Track & Field affiliate tracking context",
+      "name": "v-ecom-integrations",
+      "source": "./plugins/v-ecom-integrations",
+      "description": "Ecommerce integration patterns",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["tracking", "affiliate", "attribution"]
+      "keywords": ["integrations", "ecommerce"]
     },
     {
-      "name": "domain-open-commerce",
-      "source": "./plugins/domain-open-commerce",
-      "description": "Open Commerce MCP and AI operations context",
+      "name": "v-open-commerce",
+      "source": "./plugins/v-open-commerce",
+      "description": "Open Commerce MCP and AI operations",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["mcp", "ai", "natural-language"]
+      "keywords": ["mcp", "ai"]
     },
     {
-      "name": "domain-ecom-integrations",
-      "source": "./plugins/domain-ecom-integrations",
-      "description": "Ecommerce integration patterns and decomposer/composer",
+      "name": "v-prism",
+      "source": "./plugins/v-prism",
+      "description": "Prism checkout orchestration",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["integrations", "decomposer", "composer"]
+      "keywords": ["prism", "checkout"]
     },
     {
-      "name": "domain-violet-dashboard",
-      "source": "./plugins/domain-violet-dashboard",
-      "description": "VioletDashboard code patterns and conventions",
+      "name": "v-relay",
+      "source": "./plugins/v-relay",
+      "description": "Relay events and notifications",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["dashboard", "redux", "nextjs", "patterns"]
+      "keywords": ["relay", "events"]
     },
     {
-      "name": "platform-shopify",
-      "source": "./plugins/platform-shopify",
-      "description": "Shopify API patterns, GraphQL, webhooks",
+      "name": "v-track-and-field",
+      "source": "./plugins/v-track-and-field",
+      "description": "Track & Field affiliate tracking",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["shopify", "graphql", "webhooks"]
+      "keywords": ["tracking", "affiliate"]
     },
     {
-      "name": "platform-bigcommerce",
-      "source": "./plugins/platform-bigcommerce",
-      "description": "BigCommerce API patterns and enterprise features",
+      "name": "v-bigcommerce",
+      "source": "./plugins/v-bigcommerce",
+      "description": "BigCommerce API patterns",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["bigcommerce", "enterprise"]
+      "keywords": ["bigcommerce"]
     },
     {
-      "name": "platform-woocommerce",
-      "source": "./plugins/platform-woocommerce",
-      "description": "WooCommerce API and WordPress integration patterns",
+      "name": "v-rithum",
+      "source": "./plugins/v-rithum",
+      "description": "Rithum B2B patterns",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["woocommerce", "wordpress"]
+      "keywords": ["rithum", "b2b"]
     },
     {
-      "name": "platform-rithum",
-      "source": "./plugins/platform-rithum",
-      "description": "Rithum B2B patterns and distribution API",
+      "name": "v-shopify",
+      "source": "./plugins/v-shopify",
+      "description": "Shopify API patterns",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["rithum", "b2b", "distribution"]
+      "keywords": ["shopify"]
     },
     {
-      "name": "platform-squarespace",
-      "source": "./plugins/platform-squarespace",
-      "description": "Squarespace API and design system integration",
+      "name": "v-squarespace",
+      "source": "./plugins/v-squarespace",
+      "description": "Squarespace API patterns",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["squarespace", "design"]
+      "keywords": ["squarespace"]
     },
     {
-      "name": "skill-security",
-      "source": "./plugins/skill-security",
-      "description": "Security fundamentals and best practices",
+      "name": "v-woocommerce",
+      "source": "./plugins/v-woocommerce",
+      "description": "WooCommerce API patterns",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["security", "privacy", "compliance"]
+      "keywords": ["woocommerce"]
     },
     {
-      "name": "skill-testing",
-      "source": "./plugins/skill-testing",
-      "description": "Testing patterns, pyramid, TDD",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["testing", "tdd", "coverage"]
-    },
-    {
-      "name": "skill-observability",
-      "source": "./plugins/skill-observability",
-      "description": "Logging, tracing, metrics fundamentals",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["observability", "logging", "metrics"]
-    },
-    {
-      "name": "skill-documentation",
-      "source": "./plugins/skill-documentation",
+      "name": "v-documentation",
+      "source": "./plugins/v-documentation",
       "description": "Documentation standards and patterns",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["documentation", "api-docs"]
+      "keywords": ["documentation"]
+    },
+    {
+      "name": "v-observability",
+      "source": "./plugins/v-observability",
+      "description": "Logging, tracing, metrics",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["observability", "logging"]
+    },
+    {
+      "name": "v-security",
+      "source": "./plugins/v-security",
+      "description": "Security fundamentals",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["security"]
+    },
+    {
+      "name": "v-testing",
+      "source": "./plugins/v-testing",
+      "description": "Testing patterns and TDD",
+      "version": "1.0.0",
+      "author": { "name": "Violet Platform Team" },
+      "keywords": ["testing", "tdd"]
     }
   ]
 }

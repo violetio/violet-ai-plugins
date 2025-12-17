@@ -1,0 +1,9 @@
+{
+  "name": "v-documentation",
+  "version": "1.0.1",
+  "description": "Documentation standards and patterns",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

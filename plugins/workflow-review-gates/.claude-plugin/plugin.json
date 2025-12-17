@@ -1,9 +1,0 @@
-{
-  "name": "workflow-review-gates",
-  "version": "1.0.1",
-  "description": "Quality gates and review processes",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}

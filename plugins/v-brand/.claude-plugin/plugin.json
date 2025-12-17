@@ -1,0 +1,9 @@
+{
+  "name": "v-brand",
+  "version": "1.0.1",
+  "description": "Brand voice and visual identity guidelines",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

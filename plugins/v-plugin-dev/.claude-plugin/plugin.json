@@ -1,0 +1,9 @@
+{
+  "name": "v-plugin-dev",
+  "version": "1.0.1",
+  "description": "Create and maintain Claude Code plugins following established patterns",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

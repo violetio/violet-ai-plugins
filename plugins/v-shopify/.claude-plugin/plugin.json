@@ -1,0 +1,9 @@
+{
+  "name": "v-shopify",
+  "version": "1.0.1",
+  "description": "Shopify API patterns, GraphQL, webhooks",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

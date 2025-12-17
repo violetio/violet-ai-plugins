@@ -1,0 +1,9 @@
+{
+  "name": "v-partnerships",
+  "version": "1.0.1",
+  "description": "Partnership development and management",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}
