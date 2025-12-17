@@ -4,6 +4,7 @@ Follow the agent-assistant day-start pattern:
 
 ## 1. Read Context
 
+- **Inbox** (`personal/inbox.md`) - Ideas and tasks to process
 - Activity log (`personal/activity-log.md` if available)
 - Weekly coordination file
 - Recent convo-exits
@@ -30,6 +31,9 @@ Present for my review:
 ### Active Projects
 | Project | Status | My Role |
 |---------|--------|---------|
+
+### From Inbox
+- [ ] [High priority items from personal/inbox.md]
 
 ### Today's Focus
 1. [Highest priority]
