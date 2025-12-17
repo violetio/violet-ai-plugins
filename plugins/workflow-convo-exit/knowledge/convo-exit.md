@@ -106,13 +106,17 @@ Make only the approved changes.
 
 Use the template below.
 
-### Step 7: Activity Log Update (Optional)
+### Step 7: Activity Log Update (If Applicable)
 
-If brain repo has `personal/activity-log.md`:
+**Required if** brain repo has `personal/activity-log.md` AND significant work was done.
+
+**Not optional for significant work.** If the file exists and this was substantive effort, always update it:
 
 ```markdown
 Would you like me to update your personal activity log with what you accomplished?
 ```
+
+Then proceed with the update using the Activity Log Format below.
 
 ---
 
