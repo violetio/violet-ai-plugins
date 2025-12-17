@@ -107,44 +107,54 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 ## Usage Examples
 
 ### Engineering Project (Java/Beam/Shopify)
+
+Create `.claude/settings.json`:
 ```json
 {
-  "plugins": {
-    "marketplace": {
-      "source": "https://raw.githubusercontent.com/violetio/violet-ai-plugins/main/.claude-plugin/marketplace.json"
-    },
-    "installed": [
-      "agent-backend-engineer",
-      "agent-architect",
-      "agent-tech-lead",
-      "workflow-git-conventions",
-      "workflow-conversation-management",
-      "skill-security",
-      "skill-testing",
-      "stack-java-spring",
-      "domain-beam",
-      "platform-shopify"
-    ]
+  "enabledPlugins": {
+    "agent-backend-engineer@violet": true,
+    "agent-architect@violet": true,
+    "agent-tech-lead@violet": true,
+    "workflow-git-conventions@violet": true,
+    "workflow-conversation-management@violet": true,
+    "skill-security@violet": true,
+    "skill-testing@violet": true,
+    "stack-java-spring@violet": true,
+    "domain-beam@violet": true,
+    "platform-shopify@violet": true
+  },
+  "extraKnownMarketplaces": {
+    "violet": {
+      "source": {
+        "source": "github",
+        "repo": "violetio/violet-ai-plugins"
+      }
+    }
   }
 }
 ```
 
 ### Product Brain (PM work)
+
+Create `.claude/settings.json`:
 ```json
 {
-  "plugins": {
-    "marketplace": {
-      "source": "https://raw.githubusercontent.com/violetio/violet-ai-plugins/main/.claude-plugin/marketplace.json"
-    },
-    "installed": [
-      "agent-commerce-pm",
-      "agent-experience-designer",
-      "workflow-9d-framework",
-      "workflow-product-discovery",
-      "workflow-conversation-management",
-      "skill-documentation",
-      "domain-prism"
-    ]
+  "enabledPlugins": {
+    "agent-commerce-pm@violet": true,
+    "agent-experience-designer@violet": true,
+    "workflow-9d-framework@violet": true,
+    "workflow-product-discovery@violet": true,
+    "workflow-conversation-management@violet": true,
+    "skill-documentation@violet": true,
+    "domain-prism@violet": true
+  },
+  "extraKnownMarketplaces": {
+    "violet": {
+      "source": {
+        "source": "github",
+        "repo": "violetio/violet-ai-plugins"
+      }
+    }
   }
 }
 ```
