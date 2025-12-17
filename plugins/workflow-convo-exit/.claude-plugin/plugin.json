@@ -1,9 +1,0 @@
-{
-  "name": "workflow-convo-exit",
-  "version": "1.0.1",
-  "description": "Conversation exit protocol for debrief and continuous improvement",
-  "author": {
-    "name": "Violet Platform Team",
-    "email": "platform@violet.io"
-  }
-}
