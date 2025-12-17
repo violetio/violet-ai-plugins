@@ -7,7 +7,7 @@
     "violet": {
       "source": {
         "source": "github",
-        "repo": "violetio/violet-plugins"
+        "repo": "violetio/violet-ai-plugins"
       }
     }
   },

@@ -1,0 +1,20 @@
+{
+  "name": "platform-woocommerce",
+  "version": "1.0.0",
+  "description": "WooCommerce platform integration patterns, WordPress integration, and best practices",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "keywords": [
+    "woocommerce",
+    "wordpress",
+    "rest-api",
+    "variations",
+    "metadata",
+    "platform"
+  ],
+  "knowledge": [
+    "./knowledge/"
+  ]
+}

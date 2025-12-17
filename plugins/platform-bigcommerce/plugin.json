@@ -1,0 +1,20 @@
+{
+  "name": "platform-bigcommerce",
+  "version": "1.0.0",
+  "description": "BigCommerce platform integration patterns, enterprise features, and best practices",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "keywords": [
+    "bigcommerce",
+    "rest-api",
+    "enterprise",
+    "variants",
+    "webhooks",
+    "platform"
+  ],
+  "knowledge": [
+    "./knowledge/"
+  ]
+}

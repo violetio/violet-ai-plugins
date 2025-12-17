@@ -1,26 +1,19 @@
 {
-  "permissions": {
-    "allow": [],
-    "deny": []
-  },
-  "extraKnownMarketplaces": {
-    "violet": {
-      "source": {
-        "source": "github",
-        "repo": "violetio/violet-plugins"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "agents@violet": true,
-    "workflows@violet": true,
-    "skill-security@violet": true,
-    "skill-testing@violet": true,
-    "skill-observability@violet": true,
-    "skill-documentation@violet": true,
-    "stack-java-spring@violet": true,
-    "domain-beam@violet": true,
-    "domain-ecom-integrations@violet": true,
-    "platform-shopify@violet": true
+  "plugins": {
+    "marketplace": {
+      "source": "https://raw.githubusercontent.com/violetio/violet-ai-plugins/main/.claude-plugin/marketplace.json"
+    },
+    "installed": [
+      "agents",
+      "stack-java-spring",
+      "domain-beam",
+      "domain-ecom-integrations",
+      "platform-shopify",
+      "skill-security",
+      "skill-testing",
+      "skill-observability",
+      "skill-documentation",
+      "workflows"
+    ]
   }
 }

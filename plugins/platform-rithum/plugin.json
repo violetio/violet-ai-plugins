@@ -1,0 +1,20 @@
+{
+  "name": "platform-rithum",
+  "version": "1.0.0",
+  "description": "Rithum platform integration patterns, B2B marketplace, and drop-shipping patterns",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "keywords": [
+    "rithum",
+    "marketplace",
+    "dropshipping",
+    "b2b",
+    "suppliers",
+    "platform"
+  ],
+  "knowledge": [
+    "./knowledge/"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "platform-squarespace",
+  "version": "1.0.0",
+  "description": "Squarespace platform integration patterns, design integration, and commerce API patterns",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "keywords": [
+    "squarespace",
+    "commerce-api",
+    "pos",
+    "currency-objects",
+    "inventory",
+    "platform"
+  ],
+  "knowledge": [
+    "./knowledge/"
+  ]
+}

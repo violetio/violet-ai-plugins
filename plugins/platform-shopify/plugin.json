@@ -1,0 +1,20 @@
+{
+  "name": "platform-shopify",
+  "version": "1.0.0",
+  "description": "Shopify platform integration patterns, API knowledge, and best practices",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  },
+  "keywords": [
+    "shopify",
+    "graphql",
+    "rest-api",
+    "webhooks",
+    "ecommerce",
+    "platform"
+  ],
+  "knowledge": [
+    "./knowledge/"
+  ]
+}

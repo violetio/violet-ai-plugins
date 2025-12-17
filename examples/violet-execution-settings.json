@@ -5,9 +5,7 @@
     },
     "installed": [
       "agents",
-      "stack-typescript-react",
-      "stack-nextjs",
-      "domain-prism",
+      "stack-python",
       "skill-security",
       "skill-testing",
       "skill-observability",

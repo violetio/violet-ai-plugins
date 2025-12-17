@@ -1,10 +1,20 @@
 {
   "name": "agents",
   "version": "1.0.0",
-  "description": "All role personas: engineering, PM, CS, finance, legal, brand",
+  "description": "All role personas: engineering, PM, CS, finance, legal, brand, documentation, security",
   "author": {
     "name": "Violet Platform Team",
     "email": "platform@violet.io"
   },
-  "agents": ["./agents/"]
+  "agents": [
+    "./engineering/",
+    "./product/",
+    "./customer-success/",
+    "./finance/",
+    "./legal/",
+    "./brand/",
+    "./documentation/",
+    "./security/"
+  ],
+  "knowledge": ["./knowledge/customer-docs/"]
 }

@@ -1,4 +1,4 @@
-# Contributing to Violet Plugins
+# Contributing to Violet AI Plugins
 
 ## Plugin Categories
 

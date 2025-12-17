@@ -1,6 +1,6 @@
-# Violet Plugins
+# Violet AI Plugins
 
-Internal Claude Code plugins for Violet.
+AI-powered knowledge and agent plugins for Violet, compatible with Claude Code and other AI systems.
 
 ## Quick Start
 
@@ -10,7 +10,7 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 
 **Manual addition:**
 ```bash
-/plugin marketplace add violetio/violet-plugins
+/plugin marketplace add violetio/violet-ai-plugins
 ```
 
 ### Installing Plugins
@@ -79,7 +79,7 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 ```json
 {
   "extraKnownMarketplaces": {
-    "violet": { "source": { "source": "github", "repo": "violetio/violet-plugins" }}
+    "violet": { "source": { "source": "github", "repo": "violetio/violet-ai-plugins" }}
   },
   "enabledPlugins": {
     "agents@violet": true,
