@@ -234,28 +234,12 @@
       "keywords": ["workflow", "conversation", "exit", "deprecated"]
     },
     {
-      "name": "workflow-convo-start",
-      "source": "./plugins/workflow-convo-start",
-      "description": "Conversation start protocols for understanding and alignment",
+      "name": "workflow-convo",
+      "source": "./plugins/workflow-convo",
+      "description": "Conversation lifecycle management - start, capture, and exit protocols",
       "version": "1.0.0",
       "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "conversation", "start", "alignment"]
-    },
-    {
-      "name": "workflow-convo-capture",
-      "source": "./plugins/workflow-convo-capture",
-      "description": "Mid-conversation context capture for continuity and handoff",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "conversation", "capture", "context"]
-    },
-    {
-      "name": "workflow-convo-exit",
-      "source": "./plugins/workflow-convo-exit",
-      "description": "Conversation exit protocol for debrief and continuous improvement",
-      "version": "1.0.0",
-      "author": { "name": "Violet Platform Team" },
-      "keywords": ["workflow", "conversation", "exit", "debrief"]
+      "keywords": ["workflow", "conversation", "start", "capture", "exit"]
     },
     {
       "name": "workflow-git-conventions",
