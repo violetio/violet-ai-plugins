@@ -1,7 +1,7 @@
 {
   "name": "workflows",
   "version": "1.0.0",
-  "description": "Process patterns: git, 9D framework, product discovery, review gates",
+  "description": "Process patterns: git, 9D framework, product discovery, review gates, conversation management",
   "author": {
     "name": "Violet Platform Team",
     "email": "platform@violet.io"

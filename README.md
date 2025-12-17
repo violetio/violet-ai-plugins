@@ -71,7 +71,7 @@ If your project's `.claude/settings.json` includes this marketplace, it's alread
 ### Workflows (1)
 | Plugin | Description |
 |--------|-------------|
-| `workflows` | Git, 9D framework, product discovery, review gates |
+| `workflows` | Git, 9D framework, product discovery, review gates, conversation management |
 
 ## Usage Examples
 
