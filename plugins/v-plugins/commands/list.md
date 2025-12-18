@@ -2,18 +2,13 @@
 description: List all enabled plugins in the current project
 ---
 
-## Context
-
-- Current working directory: !`pwd`
-- Local settings: !`cat .claude/settings.json 2>/dev/null || echo "No .claude/settings.json found"`
-- Marketplace: !`cat ../violet-ai-plugins/.claude-plugin/marketplace.json 2>/dev/null | head -50 || echo "Marketplace not found at ../violet-ai-plugins"`
-
 ## Your Task
 
 List all plugins enabled in this project:
 
 1. **Read `.claude/settings.json`** in the current project
-2. **For each enabled plugin**, show:
+2. **Read marketplace.json** from `../violet-ai-plugins/.claude-plugin/marketplace.json` if available
+3. **For each enabled plugin**, show:
    - Plugin name
    - Description (from marketplace.json if available)
    - Status: ✅ Active, ⚠️ Deprecated, ❌ Not found in marketplace

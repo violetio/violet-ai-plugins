@@ -121,6 +121,32 @@ allowed-tools: ["Tool1", "Tool2"]  # Optional: restrict available tools
 Command prompt content here...
 ```
 
+**IMPORTANT: Bash Safety in Commands**
+
+Commands can use `!`command`` to execute bash and inject output, but **avoid complex operations** that trigger safety checks:
+
+- ❌ **Don't use**: pipes (`|`), redirects (`2>`), boolean operators (`||`, `&&`)
+- ✅ **Do use**: Simple commands like `pwd`
+- ✅ **Best practice**: Let the agent use tools (Read, Bash, Glob) instead of pre-executing
+
+**Example - Unsafe** (triggers safety checks):
+```markdown
+## Context
+- Settings: !`cat .claude/settings.json 2>/dev/null || echo "Not found"`
+
+## Your Task
+Do something with the settings...
+```
+
+**Example - Safe**:
+```markdown
+## Your Task
+1. Read `.claude/settings.json` if it exists
+2. Do something with the settings...
+```
+
+The agent will use the `Read` tool, which handles missing files gracefully.
+
 ---
 
 ## Updating Plugins

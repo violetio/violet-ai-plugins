@@ -2,18 +2,14 @@
 description: Start a new conversation with proper understanding and alignment
 ---
 
-## Context
-
-- Current working directory: !`pwd`
-- Check for CLAUDE.md: !`cat CLAUDE.md 2>/dev/null | head -100 || echo "No CLAUDE.md found"`
-- Recent git activity: !`git log --oneline -5 2>/dev/null || echo "Not a git repo"`
-
 ## Your Task
 
 You are starting a new conversation. Follow the convo-start protocol:
 
-1. **Read the context above** to understand the project
-2. **If CLAUDE.md exists**, identify key workflows, patterns, and conventions
+1. **Read project context**:
+   - Read `CLAUDE.md` if it exists to understand workflows, patterns, and conventions
+   - Run `git log --oneline -5` to see recent activity
+2. **Understand the project** from the context gathered
 3. **Check for active work** (dashboards, status files, Linear references)
 4. **Summarize the current state** to the user:
    - What project is this?

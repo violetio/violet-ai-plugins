@@ -211,6 +211,27 @@ Before marking a plugin complete:
 4. **No examples**: Always include code/template examples
 5. **No anti-patterns**: Show what NOT to do
 6. **Inconsistent naming**: Use kebab-case for files, exact names in plugin.json
+7. **Unsafe bash in commands**: Using complex operations in `!`command`` patterns
+
+### Bash Safety in Commands
+
+Commands can use `!`command`` to execute bash and inject output, but **avoid complex operations** that trigger safety checks:
+
+- ❌ **Don't use**: pipes (`|`), redirects (`2>`), boolean operators (`||`, `&&`)
+- ✅ **Do use**: Simple commands like `pwd`
+- ✅ **Best practice**: Let the agent use tools (Read, Bash, Glob) instead of pre-executing
+
+**Unsafe** (triggers safety checks):
+```markdown
+## Context
+- Settings: !`cat .claude/settings.json 2>/dev/null || echo "Not found"`
+```
+
+**Safe**:
+```markdown
+## Your Task
+1. Read `.claude/settings.json` if it exists
+```
 
 ---
 

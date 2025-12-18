@@ -2,11 +2,6 @@
 description: Update settings.json to fix outdated plugin names
 ---
 
-## Context
-
-- Current working directory: !`pwd`
-- Local settings: !`cat .claude/settings.json 2>/dev/null || echo "No .claude/settings.json found"`
-
 ## Your Task
 
 Update the plugin configuration to use correct names:

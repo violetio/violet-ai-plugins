@@ -2,11 +2,6 @@
 description: End conversation with proper debrief and knowledge capture
 ---
 
-## Context
-
-- Current working directory: !`pwd`
-- Check for violet-brain convo-exits: !`ls -la ../violet-brain/convo-exits/ 2>/dev/null | tail -10 || echo "violet-brain not found at ../violet-brain"`
-
 ## Your Task
 
 Execute the conversation exit protocol:

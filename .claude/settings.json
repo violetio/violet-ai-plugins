@@ -1,0 +1,17 @@
+{
+  "enabledPlugins": {
+    "v-convo@violet": true,
+    "v-plugins@violet": true,
+    "v-plugin-dev@violet": true,
+    "v-plugin-test@violet": true,
+    "v-git@violet": true
+  },
+  "extraKnownMarketplaces": {
+    "violet": {
+      "source": {
+        "source": "github",
+        "repo": "violetio/violet-ai-plugins"
+      }
+    }
+  }
+}
