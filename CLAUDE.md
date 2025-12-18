@@ -368,6 +368,123 @@ Before merging plugin changes:
 
 ---
 
+## Brain Repos vs Code Repos: Where to Start Work
+
+### The Problem
+
+Violet has two types of repositories with different purposes:
+
+1. **Brain Repos**: Strategic planning, specifications, architecture decisions, and cross-product coordination
+2. **Code Repos**: Implementation of specifications, bug fixes, and testing
+
+Starting work in a code repo when you should start in a brain repo means you'll miss critical context:
+- Strategic context and product roadmap
+- Requirements and specifications
+- Architecture decisions and trade-offs
+- Planning agents (v-architect, v-tech-lead, v-commerce-pm, v-platform-pm)
+- Cross-product coordination and design reviews
+
+**Result**: Isolated implementation, violated architecture, duplicated work.
+
+### Decision Tree: Where Should I Start?
+
+```
+START: You have a task or idea
+
+┌─────────────────────────────────────────┐
+│ Is this NEW work that doesn't exist yet?│
+└─────────────┬───────────────────────────┘
+              │
+      ┌───────┴────────┐
+      │ YES            │ NO
+      │                │
+      ▼                ▼
+┌──────────────┐  ┌──────────────────────────┐
+│ START IN     │  │ Is there an existing spec│
+│ BRAIN REPO   │  │ or ADR for this work?    │
+└──────────────┘  └──────┬───────────────────┘
+                         │
+                 ┌───────┴────────┐
+                 │ NO             │ YES
+                 │                │
+                 ▼                ▼
+        ┌─────────────────┐  ┌──────────────────────┐
+        │ START IN         │  │ Are you implementing │
+        │ BRAIN REPO       │  │ from the spec?       │
+        │ (create spec)    │  └──────┬───────────────┘
+        └──────────────────┘         │
+                                ┌────┴─────┐
+                                │ YES      │ NO
+                                │          │
+                                ▼          ▼
+                        ┌────────────┐  ┌─────────────┐
+                        │ CODE REPO  │  │ BRAIN REPO  │
+                        │ (implement)│  │ (refine)    │
+                        └────────────┘  └─────────────┘
+```
+
+**Quick Questions to Ask:**
+
+1. Does this require understanding "why" we're building it? → **BRAIN REPO**
+2. Does this involve trade-off decisions? → **BRAIN REPO**
+3. Does this need product manager input? → **BRAIN REPO**
+4. Does this need architect approval? → **BRAIN REPO**
+5. Do you have a complete spec to implement? → **CODE REPO** (only if YES)
+6. Are you fixing a bug in existing code? → **CODE REPO**
+7. Are you adding tests to existing code? → **CODE REPO**
+8. Are you refactoring without changing behavior? → **CODE REPO**
+
+### Plugin Distribution: Brain Repos vs Code Repos
+
+**Brain Repos Should Have** (25-40 plugins):
+- Planning agents: v-architect, v-tech-lead, v-commerce-pm, v-platform-pm
+- Workflows: v-9d, v-discovery, v-gates
+- ALL relevant domain plugins (for strategic context)
+- ALL relevant platform plugins (for integration strategy)
+- Core skills: v-security, v-testing, v-observability, v-documentation
+- Implementation agents (optional): v-backend, v-frontend, v-qa
+- Tools: v-plugins, v-convo, v-git
+
+**Code Repos Should Have** (8-12 plugins maximum):
+- ONE implementation agent: v-backend OR v-frontend (not both)
+- ONE stack plugin: v-java-spring, v-typescript-react, v-nextjs, or v-python
+- ONE domain plugin: The specific domain this repository implements
+- Core skills: v-security, v-testing, v-observability, v-documentation
+- Essential workflows: v-git, v-convo
+- Tools: v-plugins
+
+**Code Repos Should NOT Have**:
+- Planning agents (v-architect, v-tech-lead, v-*-pm)
+- Product development workflows (v-9d, v-discovery, v-gates)
+- Multiple domain plugins (strategy belongs in brain repo)
+- Business agents (v-customer-success, v-support, v-partnerships, etc.)
+
+### Repository Examples
+
+| Repo Type | Example | Expected Plugin Count | Key Agents |
+|-----------|---------|----------------------|-----------|
+| Brain Repo | violet-brain | 37-40 | v-architect, v-tech-lead, all product PMs |
+| Brain Repo | prism-brain | 25-30 | v-architect, v-tech-lead, v-commerce-pm |
+| Brain Repo | beam-brain | 25-30 | v-architect, v-tech-lead, v-commerce-pm |
+| Code Repo | VioletDashboard | 8-10 | v-frontend only |
+| Code Repo | BeamService | 8-10 | v-backend only |
+
+### Using the Context Checker
+
+Run `/v-plugins-context` to verify you're working in the right repository type for your task:
+
+```
+/v-plugins-context
+```
+
+This command will:
+- Detect if you're in a brain repo or code repo
+- Analyze your conversation context
+- Warn if doing planning work in a code repo
+- Suggest switching repos if needed
+
+---
+
 ## Related Repos
 
 | Repo | Purpose |

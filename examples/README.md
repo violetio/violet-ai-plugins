@@ -9,6 +9,51 @@ This directory contains example `.claude/settings.json` configurations for diffe
 3. Commit to version control (plugins configuration should be committed!)
 4. Add `.claude/settings.json` to your CODEOWNERS file requiring eng-leads approval
 
+## Brain Repos vs Code Repos: Choosing the Right Example
+
+### Understanding Repository Types
+
+**Brain Repositories** (planning and strategy):
+- `violet-brain`: Central coordination and cross-product context
+- `{product}-brain` (e.g., `prism-brain`, `beam-brain`): Product-specific planning
+- **Purpose**: Create specs, make architectural decisions, coordinate across teams
+- **Plugin Count**: 25-40 plugins (comprehensive)
+- **Key Plugins**: v-architect, v-tech-lead, v-commerce-pm, v-platform-pm, v-9d, v-discovery
+
+**Code Repositories** (implementation only):
+- `{ServiceName}Service` (e.g., `BeamService`, `PrismService`): Backend services
+- `{AppName}Dashboard` (e.g., `VioletDashboard`): Frontend applications
+- **Purpose**: Implement from existing specs, fix bugs, add tests
+- **Plugin Count**: 8-12 plugins (minimal and focused)
+- **Key Plugins**: ONE implementation agent, ONE stack, ONE domain
+
+### Which Example to Use?
+
+**Ask yourself:**
+
+1. **Is this repository for planning, specs, or coordination?** → Use **Brain Repo Example**
+   - If YES: See `violet-brain-settings.json` or `{product}-brain-settings.json`
+
+2. **Is this repository for implementing code?** → Use **Code Repo Example**
+   - If YES: See `BeamService-settings.json`, `VioletDashboard-settings.json`, or use `CODE-REPO-TEMPLATE.json`
+
+3. **Unsure which type of repo this is?** → Check for:
+   - Brain repo indicators: Has `specs/`, `roadmap/`, or `patterns/` directories
+   - Code repo indicators: Has `src/`, `lib/`, or main application code
+
+**When to start planning work in brain repos:**
+- NEW feature without existing spec
+- Architectural decisions needed
+- Trade-off decisions required
+- Product manager input needed
+- Architect approval needed
+
+**When to use code repos:**
+- Implementing from existing spec or ADR
+- Fixing known bugs
+- Adding tests to existing code
+- Refactoring without changing behavior
+
 ## Examples by Repository
 
 ### BeamService

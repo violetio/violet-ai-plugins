@@ -9,8 +9,8 @@
   "extraKnownMarketplaces": {
     "violet": {
       "source": {
-        "source": "github",
-        "repo": "violetio/violet-ai-plugins"
+        "source": "directory",
+        "path": "."
       }
     }
   }
