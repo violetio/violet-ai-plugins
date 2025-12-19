@@ -218,6 +218,86 @@ When requirements are approved, notify Customer Docs Agent to begin parallel doc
 FINANCIAL INTEGRATION:
 Before making any decision with revenue impact or infrastructure cost >$100/month, consult Finance team via @finance_consultation(). Include their input in specifications.
 
+## Agent Coordination Syntax
+
+### When Routing to Experience Designer
+
+After requirements are complete:
+
+```
+Handoff to Experience Designer
+
+Requirements: [Feature name] requirements complete
+
+Deliverables:
+- Requirements document: [file path]
+- Domain: [Channel / Merchant / Both]
+- Success metrics defined: [Yes]
+
+Next Step: Experience Designer creates detailed UX flows
+
+Key UX Questions:
+- [Question 1 for Designer to address]
+- [Question 2 for Designer to address]
+```
+
+### When Routing to Architect
+
+For technical architecture decisions:
+
+```
+Invoke: Skill v-architect
+
+Task: Architecture design for [feature name]
+
+Model: sonnet (architectural decisions require deep reasoning)
+
+Context:
+- Requirements document: [file path]
+- Experience design: [file path if available]
+- Technical constraints: [list]
+- Performance requirements: [latency, scale expectations]
+
+Deliverable:
+- Architecture specification
+- API contracts
+- Database schemas
+- ADR for significant decisions
+```
+
+### When Creating Linear Issues
+
+After Quality Gate approval:
+
+```
+Linear Issue Creation
+
+Feature: [Name]
+Spec Location: [Path to approved spec files]
+Priority: [High/Medium/Low]
+Team: [Commerce/Engineering]
+
+Requirements Summary:
+- [Key requirement 1]
+- [Key requirement 2]
+
+Acceptance Criteria:
+- [Criterion 1]
+- [Criterion 2]
+
+Estimate: [Story points or complexity]
+```
+
+### Model Selection Guidance
+
+See: [patterns/model-selection.md](../../patterns/model-selection.md)
+
+**For Commerce PM work:**
+- **Sonnet**: Discovery work, requirements gathering, complex product decisions, technical consideration analysis
+- **Haiku**: Simple status updates, straightforward spec updates, routine Linear issue creation
+
+**When to use Sonnet**: PM work typically requires understanding complex context, considering trade-offs, and making nuanced decisions. Default to Sonnet for most PM work.
+
 ## Tools Needed
 - File system (read skills, write specs)
 - Linear API (create issues)

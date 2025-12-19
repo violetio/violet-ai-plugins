@@ -97,6 +97,77 @@ See [patterns/documentation-workflow.md](../patterns/documentation-workflow.md) 
 FINANCIAL INTEGRATION:
 Before finalizing any decision with infrastructure cost >$100/month, consult Finance team via @finance_consultation(). Include their analysis in your ADR.
 
+## Agent Coordination Syntax
+
+### When Receiving Work from PM
+
+**Expected invocation format:**
+```
+Invoke: Skill v-architect
+
+Task: [Architecture design needed for feature/system]
+
+Model: sonnet (architectural decisions require deep reasoning)
+Note: Use opus only for critical multi-system architecture with high stakes
+
+Context:
+- [PM requirements document]
+- [Experience Designer specs]
+- [Existing system context]
+- [Technical constraints]
+
+Deliverable:
+- Architecture specification (system design, API contracts, database schemas)
+- ADR for significant decisions
+- Frontend architecture (component hierarchy, state management, routing)
+- Hand off to Tech Lead for implementation planning
+```
+
+### When Routing to Tech Lead
+
+After architecture is complete:
+
+```
+Handoff to Tech Lead
+
+Architecture: [Feature name] is complete
+
+Deliverables:
+- Architecture spec: [file path]
+- API specification: [file path]
+- Database schema: [file path]
+- ADRs: [list of ADRs with links]
+- Frontend architecture: [file path]
+
+Next Step: Tech Lead creates implementation plan and routes to engineers
+```
+
+### When Consulting with Engineers
+
+If you need technical input during design:
+
+```
+Request: Technical Consultation
+
+Question: [Specific technical question]
+
+Context: [Why you're asking, what decision depends on this]
+
+Options Considered: [If applicable, options you're evaluating]
+
+Needed By: [Which spec or ADR needs this input]
+```
+
+### Model Selection Guidance
+
+See: [patterns/model-selection.md](../../patterns/model-selection.md)
+
+**For Architect work:**
+- **Sonnet**: Always use for architectural decisions (they require deep reasoning and context)
+- **Opus**: Only for critical architecture affecting multiple systems, high-stakes decisions, or novel problem solving
+
+**Rationale**: Architecture sets the foundation for all engineering work. The cost of poor architecture decisions far exceeds model costs. Always use Sonnet minimum, escalate to Opus when stakes are exceptionally high.
+
 ## Tools Needed
 - File system (read/write to /specs)
 - Web search (technical research)

@@ -110,6 +110,95 @@ When you approve code, notify both docs agents to validate and finalize:
 
 This is the critical moment where docs transition from "draft" to "final". See [patterns/documentation-workflow.md](../patterns/documentation-workflow.md).
 
+## Agent Coordination Syntax
+
+### When Routing Work to Engineers
+
+**To Frontend Engineer:**
+```
+Invoke: Skill v-frontend-engineer
+
+Task: [Specific implementation task or fixes needed]
+
+Model: [sonnet for complex/architectural | haiku for simple/established patterns]
+
+Context:
+- [Relevant architecture specs or design docs]
+- [Files that need changes]
+- [Patterns to follow from domain docs]
+- [PR or issue reference if applicable]
+
+Deliverable:
+- [Expected code changes]
+- Report completion back to Tech Lead
+```
+
+**To Backend Engineer:**
+```
+Invoke: Skill v-backend-engineer
+
+Task: [Specific implementation task or fixes needed]
+
+Model: [sonnet for complex/architectural | haiku for simple/established patterns]
+
+Context:
+- [Architecture specs]
+- [API contracts]
+- [Domain patterns]
+
+Deliverable:
+- [Expected implementation]
+- Report completion back to Tech Lead
+```
+
+### When Routing to QA Engineer
+
+After approving code changes:
+
+```
+Invoke: Skill v-qa-engineer
+
+Task: [Testing requirements for the approved code]
+
+Model: [sonnet for test strategy | haiku for test implementation following patterns]
+
+Context:
+- [What was implemented]
+- [Critical functionality to test]
+- [Domain-specific testing requirements]
+- [Coverage targets]
+
+Deliverable:
+- Test plan (if strategy needed)
+- Implemented tests (unit, integration, E2E as needed)
+- All tests passing
+- Report completion back to Tech Lead
+```
+
+### Receiving Work from PM/Architect
+
+When PM or Architect routes a task to you:
+
+**Expected format:**
+```
+Task: Review [feature/PR] for [specific concerns]
+Context: [Specs, architectural decisions, constraints]
+Focus: [What to pay special attention to]
+```
+
+Your response should include:
+- Detailed code review using standard format
+- Explicit routing to next agent (Engineer or QA)
+- Updated status in coordination files
+
+### Model Selection Guidance
+
+See: [patterns/model-selection.md](../../patterns/model-selection.md)
+
+**For Tech Lead work:**
+- **Sonnet**: PR comment analysis, architectural review, complex coordination decisions
+- **Haiku**: Simple routing decisions, status updates, straightforward approvals
+
 ## Tools Needed
 - Full codebase access
 - Code execution

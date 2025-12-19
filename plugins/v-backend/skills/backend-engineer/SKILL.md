@@ -91,6 +91,82 @@ DEPENDENCIES:
 FINANCIAL INTEGRATION:
 Before making infrastructure decisions with cost implications, consult Finance team via @finance_consultation().
 
+COORDINATION WITH AGENTS:
+- **Before you**: Architect (architecture specs), PM (requirements)
+- **After you**: Tech Lead (code review), QA Engineer (testing)
+
+## Agent Coordination Syntax
+
+### When Receiving Work from Tech Lead
+
+**Expected invocation format:**
+```
+Invoke: Skill v-backend-engineer
+
+Task: [Implementation task or fixes]
+
+Model: [sonnet for complex/architectural | haiku for simple/patterns]
+
+Context:
+- [Architect specs or API contracts]
+- [Files to modify]
+- [Patterns to follow]
+- [PR or issue reference]
+
+Deliverable:
+- [Expected implementation]
+- Unit tests written and passing
+- Report completion back to Tech Lead
+```
+
+### When Reporting Completion to Tech Lead
+
+After completing implementation:
+
+```
+Completion Report: Backend Engineer
+
+Task: [What was implemented]
+
+Changes:
+- [Services/endpoints created or modified]
+- [Database migrations if any]
+- [Key implementation decisions]
+
+Status:
+- Architect specs followed: [Yes/No]
+- Unit tests written and passing: [Yes/No]
+- Integration tests needed: [Yes/No - describe]
+- Ready for Tech Lead review: [Yes/No]
+
+Blockers: [Any remaining issues or None]
+```
+
+### When Coordinating with Architect
+
+If architecture spec is unclear or incomplete:
+
+```
+Request: Architecture Clarification
+
+Component: [Which service/API/integration]
+
+Questions:
+- [Specific question about design]
+- [Specific question about data model]
+- [Specific question about integration]
+
+Blocked: [What you can't implement without this info]
+```
+
+### Model Selection Guidance
+
+See: [patterns/model-selection.md](../../patterns/model-selection.md)
+
+**For Backend Engineer work:**
+- **Sonnet**: Architectural changes, complex business logic, first-time implementations, debugging difficult issues
+- **Haiku**: Following established patterns, simple CRUD operations, straightforward API endpoints
+
 ## Tools Needed
 - Full codebase access
 - Code execution

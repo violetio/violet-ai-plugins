@@ -485,6 +485,196 @@ This command will:
 
 ---
 
+## Model Selection Strategy
+
+Claude Code supports multiple models with different capabilities and costs. **Always select the appropriate model for the task at hand.**
+
+See comprehensive guide: [patterns/model-selection.md](patterns/model-selection.md)
+
+### Quick Reference
+
+| Model | Speed | Cost | Best For |
+|-------|-------|------|----------|
+| **Sonnet 4.5** | Medium | Medium | Complex reasoning, architectural decisions, debugging |
+| **Haiku** | Fast | Low | Simple tasks, pattern matching, established workflows |
+| **Opus 4.5** | Slow | High | Critical decisions, novel problems, high-stakes work |
+
+### Decision Tree
+
+```
+Is this a critical security/architecture decision?
+└─ YES → Opus 4.5
+└─ NO ↓
+
+Is this following an established pattern exactly?
+└─ YES → Haiku
+└─ NO ↓
+
+Does this require understanding context/trade-offs?
+└─ YES → Sonnet 4.5
+└─ NO → Haiku
+```
+
+### Agent-Specific Recommendations
+
+| Agent | Sonnet Use Cases | Haiku Use Cases |
+|-------|------------------|-----------------|
+| **Tech Lead** | PR analysis, coordination, evaluation | Status updates, routing |
+| **Frontend** | Architectural changes, pattern violations | console.log removal, following patterns |
+| **Backend** | Complex logic, first-time implementations | CRUD operations, established patterns |
+| **QA** | Test strategy, complex scenarios | Implementing tests from patterns |
+| **Architect** | Always use Sonnet (Opus for critical decisions) | N/A |
+| **PM** | Discovery, requirements, complex decisions | Status updates, routine tasks |
+
+### When to Use Each Model
+
+**Use Sonnet 4.5 When:**
+- Architectural violations need fixing
+- Pattern compliance (first-time learning)
+- Complex refactoring or debugging
+- Understanding nuanced feedback
+- Designing test strategy
+- Making decisions with trade-offs
+
+**Use Haiku When:**
+- Simple fixes (typo, console.log removal)
+- Following established patterns exactly
+- Straightforward implementations with clear examples
+- Running test suites
+- Simple documentation updates
+
+**Use Opus 4.5 When:**
+- Security-sensitive decisions
+- Complex multi-system architecture
+- Novel problem solving (no established patterns)
+- High-stakes refactoring
+- Critical production incidents
+
+**Default**: When uncertain, use Sonnet (safe default for most work)
+
+---
+
+## Agent Invocation Syntax
+
+All agents in violet-ai-plugins now support **explicit invocation syntax** for coordination.
+
+### Invocation Template
+
+When routing work between agents, use this format:
+
+```
+Invoke: Skill v-{agent-name}
+
+Task: [Specific task description]
+
+Model: [sonnet | haiku | opus]
+
+Context:
+- [Relevant specs, files, patterns to read]
+- [Domain docs to reference]
+- [Constraints or requirements]
+
+Deliverable:
+- [Expected output]
+- Report completion back to [agent]
+```
+
+### Examples
+
+**Tech Lead routes to Frontend Engineer:**
+```
+Invoke: Skill v-frontend-engineer
+
+Task: Fix architectural violations in merchant pre-registration PR
+
+Model: sonnet
+
+Context:
+- Read: systems/violet-dashboard/architecture-patterns.md (Redux patterns)
+- PR: github.com/violetio/VioletDashboard/pull/1703
+- Fix: Rewrite thunks to use createAppAsyncThunk pattern
+- Files: redux/thunks/preRegistration.ts, redux/reducers/preRegistration.ts
+
+Deliverable:
+- Pattern-compliant implementation
+- Report completion back to Tech Lead
+```
+
+**Tech Lead routes to QA Engineer:**
+```
+Invoke: Skill v-qa-engineer
+
+Task: Write comprehensive tests for merchant pre-registration feature
+
+Model: sonnet (strategy), haiku (implementation)
+
+Context:
+- What was implemented: redux/thunks/preRegistration.ts, pages/api/merchants/pre-register.ts
+- Critical functionality: Redux state management, API proxy pattern
+- Domain testing: Multi-tenancy isolation testing required
+- Coverage target: >80% for Redux, API routes, hooks
+
+Deliverable:
+- Test plan (what to test, coverage targets)
+- Unit tests for Redux (thunks + reducers)
+- Unit tests for API routes
+- All tests passing
+- Report completion back to Tech Lead
+```
+
+**PM routes to Architect:**
+```
+Invoke: Skill v-architect
+
+Task: Architecture design for merchant pre-registration feature
+
+Model: sonnet
+
+Context:
+- Requirements document: specs/merchant-pre-registration/requirements.md
+- Experience design: specs/merchant-pre-registration/experience.md
+- Technical constraints: Must use Redux, API proxy pattern mandatory
+- Performance: <200ms p99 for dashboard API calls
+
+Deliverable:
+- Architecture specification
+- API contracts
+- Database schemas (if needed)
+- ADR for significant decisions
+- Hand off to Tech Lead for implementation planning
+```
+
+### Completion Reports
+
+After completing work, agents should report back in a structured format:
+
+```
+Completion Report: [Agent Name]
+
+Task: [What was worked on]
+
+Changes:
+- [Key changes made]
+- [Files modified]
+
+Status:
+- Requirements met: [Yes/No]
+- Tests passing: [Yes/No]
+- Ready for next phase: [Yes/No]
+
+Blockers: [Any issues or None]
+```
+
+### Benefits of Explicit Invocation
+
+1. **Actionable**: Agents know exactly what to do (not just prose descriptions)
+2. **Model selection**: Specifies which model to use based on complexity
+3. **Context loading**: Lists exact files and patterns to read
+4. **Deliverables**: Clear expectations for output
+5. **Coordination**: Explicit handoff between agents
+
+---
+
 ## Related Repos
 
 | Repo | Purpose |

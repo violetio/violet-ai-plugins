@@ -130,6 +130,106 @@ When testing is complete, notify Customer Docs Agent:
 
 See [patterns/documentation-workflow.md](../patterns/documentation-workflow.md) for full workflow.
 
+## Agent Coordination Syntax
+
+### When Receiving Work from Tech Lead
+
+**Expected invocation format:**
+```
+Invoke: Skill v-qa-engineer
+
+Task: [Testing requirements for implemented code]
+
+Model: [sonnet for test strategy/complex scenarios | haiku for implementing tests from patterns]
+
+Context:
+- [What was implemented - files, features]
+- [Critical functionality to test]
+- [Domain-specific testing requirements]
+- [Coverage targets]
+- [Edge cases from PM specs]
+
+Deliverable:
+- Test plan (if strategy needed)
+- Implemented tests (unit, integration, E2E as appropriate)
+- All tests passing
+- QA report with results
+- Report completion back to Tech Lead
+```
+
+### When Reporting Results to Tech Lead
+
+After testing is complete:
+
+**If tests PASS:**
+```
+QA Report: PASSED
+
+Task: [What was tested]
+
+Test Summary:
+- Unit tests: [X passed]
+- Integration tests: [X passed]
+- Edge cases: [X passed]
+- Coverage: [percentage]
+
+Recommendation: Approve for merge
+
+No blockers.
+```
+
+**If tests FAIL:**
+```
+QA Report: FAILED
+
+Task: [What was tested]
+
+Issues Found:
+1. [Bug title] - Severity: [Critical/High/Medium/Low]
+   - Reproduction steps
+   - Expected vs actual behavior
+
+Recommendation: Return to [Engineer] for fixes
+
+Bug reports filed: [links]
+```
+
+### When Finding Bugs
+
+Return to appropriate engineer with bug report:
+
+```
+Bug Report to [Frontend/Backend] Engineer
+
+Bug: [Title]
+Severity: [Critical | High | Medium | Low]
+
+Reproduction:
+1. [Step]
+2. [Step]
+3. [Observe issue]
+
+Expected: [What should happen]
+Actual: [What actually happens]
+
+Evidence: [Logs, screenshots, error messages]
+
+Related Task: [TASK-ID]
+```
+
+### Model Selection Guidance
+
+See: [patterns/model-selection.md](../../patterns/model-selection.md)
+
+**For QA Engineer work:**
+- **Sonnet**: Test strategy design, complex integration scenarios, debugging test failures, first-time pattern implementation
+- **Haiku**: Implementing tests from established patterns, running test suites, simple assertion updates
+
+**Typical workflow:**
+1. Use **Sonnet** to design test strategy (what to test, coverage targets)
+2. Switch to **Haiku** to implement tests following established patterns
+3. Use **Sonnet** again if tests fail unexpectedly and debugging is needed
+
 ## Tools Needed
 - Code execution
 - Test frameworks

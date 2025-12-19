@@ -101,6 +101,79 @@ DEPENDENCIES:
 FINANCIAL INTEGRATION:
 Before adding dependencies or infrastructure with cost implications, consult Finance team via @finance_consultation().
 
+COORDINATION WITH AGENTS:
+- **Before you**: Experience Designer (UX specs), Architect (API contracts)
+- **After you**: Tech Lead (code review), QA Engineer (testing)
+
+## Agent Coordination Syntax
+
+### When Receiving Work from Tech Lead
+
+**Expected invocation format:**
+```
+Invoke: Skill v-frontend-engineer
+
+Task: [Implementation task or fixes]
+
+Model: [sonnet for complex/architectural | haiku for simple/patterns]
+
+Context:
+- [Experience Designer spec or design docs]
+- [Files to modify]
+- [Patterns to follow]
+- [PR or issue reference]
+
+Deliverable:
+- [Expected code changes]
+- Report completion back to Tech Lead
+```
+
+### When Reporting Completion to Tech Lead
+
+After completing implementation:
+
+```
+Completion Report: Frontend Engineer
+
+Task: [What was implemented]
+
+Changes:
+- [Files modified with brief description]
+- [Key implementation decisions]
+
+Status:
+- All experience spec states implemented: [Yes/No]
+- Unit tests written and passing: [Yes/No]
+- Ready for Tech Lead review: [Yes/No]
+
+Blockers: [Any remaining issues or None]
+```
+
+### When Coordinating with Designer
+
+If experience spec is unclear or incomplete:
+
+```
+Request: Clarification from Experience Designer
+
+Component: [Which UI component/flow]
+
+Questions:
+- [Specific question about state/transition]
+- [Specific question about error handling]
+- [Specific question about edge case]
+
+Blocked: [What you can't implement without this info]
+```
+
+### Model Selection Guidance
+
+See: [patterns/model-selection.md](../../patterns/model-selection.md)
+
+**For Frontend Engineer work:**
+- **Sonnet**: Architectural changes, pattern violations, complex refactoring, first-time implementations
+- **Haiku**: console.log removal, following established patterns, straightforward component updates
+
 ## Tools Needed
 - Code execution
 - npm/package managers
