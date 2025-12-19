@@ -359,10 +359,146 @@ export const PreRegTable: React.FC<PreRegTableProps> = ({ data, loading, onEdit,
 
 ---
 
+## UI Component Policy: NO MATERIAL-UI (CRITICAL)
+
+**VioletDashboard has STOPPED using Material-UI (MUI).** Do NOT create new components with MUI.
+
+### Why No MUI?
+
+1. **Design System Mismatch**: MUI creates problems matching VioletDashboard's custom design system
+2. **Visual Inconsistency**: MUI components look different from existing designs
+3. **Migration Complete**: VioletDashboard uses custom components with SCSS modules and CSS variables
+
+### Instead of MUI, Use:
+
+| DON'T Use (MUI) | DO Use (Custom Design System) |
+|-----------------|-------------------------------|
+| `<Tabs>`, `<Tab>` | Custom tabs with `<button>` + SCSS |
+| `<Table>`, `<TableRow>`, `<TableCell>` | `<div>` with flexbox + SCSS modules |
+| `<Dialog>`, `<DialogTitle>` | Custom modal with `<div>` + SCSS |
+| `<TextField>`, `<Input>` | Custom input components |
+| `<Button>` | `<button>` with SCSS (or `@/components/Button`) |
+| `<IconButton>`, `<Tooltip>` | `<button>` with SCSS |
+| `<Chip>` | `<span>` with SCSS classes |
+| `<CircularProgress>` | `<Spinner>` component |
+| `@mui/icons-material/*` | Figma SVG exports from `public/images/svg/` |
+
+### Design System Patterns
+
+**CSS Variables (use these):**
+```scss
+--primary-light          // Primary color
+--secondary-color        // Borders, backgrounds
+--text-color-tertiary    // Muted text
+--button-background-color // Button fills
+--border-default         // Standard borders
+--light-gray             // Text color
+```
+
+**SCSS Modules:**
+```scss
+// MyComponent.module.scss
+.container {
+  background: var(--secondary-color);
+  border: 1px solid var(--border-default);
+}
+
+.button {
+  background: var(--button-background-color);
+  color: var(--text-color);
+
+  &:hover {
+    background: var(--button-background-color-hover);
+  }
+}
+```
+
+**Icons:**
+```typescript
+// DON'T: Material-UI icons
+import { ContentCopy, MoreVert } from '@mui/icons-material';
+
+// DO: Figma SVG exports
+import CopyIcon from '@/public/images/svg/copy.svg';
+import ThreeDotsIcon from '@/public/images/svg/three-dots.svg';
+
+// Usage
+<button className={styles.iconButton}>
+  <CopyIcon className={styles.icon} />
+</button>
+```
+
+### Example: Tabs Without MUI
+
+```typescript
+// Custom tab navigation
+const MerchantsTabNavigation = ({ activeTab, onTabChange }) => (
+  <div className={styles.tabContainer}>
+    <div className={styles.tabs}>
+      <button
+        className={`${styles.tab} ${activeTab === 'connected' ? styles.active : ''}`}
+        onClick={() => onTabChange('connected')}
+      >
+        Connected Merchants
+      </button>
+      <button
+        className={`${styles.tab} ${activeTab === 'pre-registered' ? styles.active : ''}`}
+        onClick={() => onTabChange('pre-registered')}
+      >
+        Pre-Registered
+      </button>
+    </div>
+  </div>
+);
+```
+
+```scss
+// MerchantsTabNavigation.module.scss
+.tabContainer {
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color-tertiary);
+
+  &:hover {
+    color: var(--primary-light);
+  }
+
+  &.active {
+    color: var(--primary-light);
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--button-background-color);
+    }
+  }
+}
+```
+
+---
+
 ## Anti-Patterns (DO NOT USE)
 
 | Wrong | Correct |
 |-------|---------|
+| `@mui/material` imports | Custom components with SCSS modules |
+| `@mui/icons-material` icons | Figma SVG exports from `public/images/svg/` |
 | `fetch('/api/...')` | `axiosWrapper(CONFIG_TYPE.VIOLET_PROXY_API, {...})` |
 | `createSlice({...})` | `createReducer(initialState, (builder) => {...})` |
 | `createAsyncThunk()` | `createAppAsyncThunk<R, P, M>()` |
