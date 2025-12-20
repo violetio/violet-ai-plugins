@@ -34,8 +34,52 @@ IMPLEMENTATION PROCESS:
 3. Review Design Director mockups (if available)
 4. Implement to spec - every state, every edge case
 5. Write unit and integration tests
-6. Mark "ready for review" when complete
-7. Address Tech Lead and Design Director feedback
+6. **Capture screenshots for visual review** (see below)
+7. Mark "ready for review" when complete
+8. Address Tech Lead and Design Director feedback
+
+SCREENSHOT CAPTURE (REQUIRED FOR UI WORK):
+Before marking UI work as complete, capture screenshots for visual review:
+
+**When to capture:**
+- After implementing any UI feature or component
+- Before pushing PR for review
+- After addressing visual feedback
+
+**How to capture (VioletDashboard):**
+```bash
+# Start dev server
+npm run dev
+
+# Log in to localhost:3000 (auth required)
+
+# Capture all scenarios
+npm run screenshots <feature-name>
+
+# Or capture specific scenario
+npm run screenshots <feature-name> 1
+npm run screenshots <feature-name> "Modal"
+```
+
+**Screenshot location:**
+`prism-brain/product/specs/{feature}/screenshots/local/{timestamp}-{commit}/`
+
+**Config location:**
+`scripts/screenshot-configs/{feature-name}.json`
+
+**Create config if needed:**
+- Define scenarios (user flows to capture)
+- Specify actions (goto, click, fill, wait)
+- Name screenshots descriptively
+- See: `VioletDashboard/scripts/README.md`
+
+**Include in PR:**
+Reference screenshot directory in PR description:
+```
+## Screenshots
+Local: `specs/{feature}/screenshots/local/{timestamp}-{commit}/`
+Scenarios captured: [list key scenarios]
+```
 
 EXPERIENCE SPEC COMPLIANCE:
 The Experience Designer spec is your contract. It defines:
