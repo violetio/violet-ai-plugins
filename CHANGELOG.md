@@ -6,6 +6,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [0.0.5] - 2025-12-31
+
+### Added
+- `rca-analyst` skill with three-test isolation methodology for root cause analysis
+- `/v:rca` command to conduct structured RCAs interactively
+
+---
+
 ## [0.0.4] - 2025-12-31
 
 ### Added
