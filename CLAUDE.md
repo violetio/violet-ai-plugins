@@ -39,21 +39,18 @@ After plugin changes are pushed to this repo:
 
 ---
 
-## Versioning Convention
+## Contributing & Releases
 
-**All plugins start at version 0.0.1** and follow this increment pattern:
+For detailed guidance on:
+- **Adding skills or commands** → See [CONTRIBUTING.md](./CONTRIBUTING.md#adding-skills)
+- **Versioning convention** → See [CONTRIBUTING.md](./CONTRIBUTING.md#versioning)
+- **Releasing new versions** → See [CONTRIBUTING.md](./CONTRIBUTING.md#release-process)
+- **Change history** → See [CHANGELOG.md](./CHANGELOG.md)
 
-| Level | When to Increment | Example |
-|-------|-------------------|---------|
-| **Patch (0.0.X)** | Bug fixes, minor improvements, small additions | 0.0.1 → 0.0.2 |
-| **Minor (0.X.0)** | Big updates, new features, significant changes | 0.0.5 → 0.1.0 |
-| **Major (X.0.0)** | Massive reworks, breaking changes, architectural shifts | 0.3.0 → 1.0.0 |
-
-**Guidelines:**
-- Most changes increment the **patch** level (third number)
-- Only increment **minor** for substantial new functionality
-- Reserve **major** for complete redesigns or breaking changes
-- This keeps versions meaningful and avoids confusion from rapid major version jumps
+**Quick reference:**
+- Increment patch (0.0.X) for most changes
+- Update both `plugin.json` and `marketplace.json` versions (must match!)
+- Update CHANGELOG.md with your changes
 
 ---
 
@@ -145,64 +142,16 @@ The v plugin supports Violet's product development workflow:
 
 ---
 
-## Adding New Skills
-
-1. Create skill directory:
-   ```bash
-   mkdir -p plugins/v/skills/{skill-name}
-   ```
-
-2. Create SKILL.md:
-   ```markdown
-   ---
-   name: skill-name
-   description: What this skill does
-   ---
-
-   # Skill Name
-
-   Content...
-   ```
-
-3. Increment version in `plugins/v/.claude-plugin/plugin.json`
-
-4. Update marketplace.json if needed
-
-5. Commit, push, and refresh
-
----
-
-## Adding New Commands
-
-1. Create command file:
-   ```bash
-   touch plugins/v/commands/{command-name}.md
-   ```
-
-2. Add content with frontmatter:
-   ```markdown
-   ---
-   description: What this command does
-   ---
-
-   Command prompt...
-   ```
-
-3. Increment version in `plugins/v/.claude-plugin/plugin.json`
-
-4. Commit, push, and refresh
-
----
-
 ## Quality Checklist
 
 Before merging changes:
 
-- [ ] Version incremented appropriately (usually patch level)
-- [ ] Skills have YAML frontmatter with name and description
-- [ ] Commands have YAML frontmatter with description
-- [ ] marketplace.json updated if adding new plugins
-- [ ] No `knowledge` field in plugin.json (not supported)
+- [ ] Version incremented in both `plugin.json` and `marketplace.json`
+- [ ] CHANGELOG.md updated with changes
+- [ ] Skills have YAML frontmatter (name, description)
+- [ ] Commands have YAML frontmatter (description)
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ---
 

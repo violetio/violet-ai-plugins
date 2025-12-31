@@ -13,7 +13,7 @@
       "name": "v",
       "source": "./plugins/v",
       "description": "Violet product development workflow - discovery, definition, design, development, and review",
-      "version": "0.0.2",
+      "version": "0.0.4",
       "author": { "name": "Violet Platform Team" },
       "keywords": ["workflow", "product", "development", "violet"]
     }
