@@ -41,9 +41,9 @@ Present this selection:
 Which domains are relevant to this work? (Select all that apply)
 
 **Products:**
-- [ ] Prism (checkout, payments, orders)
-- [ ] Beam (products, sync, dropship)
-- [ ] Relay (events, webhooks, notifications)
+- [ ] Prism (core platform: integrations, transformation, persistence, orchestration)
+- [ ] Beam (no-code dropshipping built on Prism)
+- [ ] Relay (integration/sync + transformation, no persistence/orchestration)
 - [ ] VioletConnect (merchant onboarding)
 
 **Platforms:**
