@@ -1,0 +1,9 @@
+{
+  "name": "v",
+  "version": "0.0.2",
+  "description": "Violet product development workflow - discovery, definition, design, development, and review",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

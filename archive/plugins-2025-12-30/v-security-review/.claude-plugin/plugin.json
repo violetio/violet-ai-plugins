@@ -1,0 +1,9 @@
+{
+  "name": "v-security-review",
+  "version": "1.0.0",
+  "description": "Security review with blocking authority for critical vulnerabilities",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

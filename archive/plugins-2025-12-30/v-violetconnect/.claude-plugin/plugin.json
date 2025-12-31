@@ -1,0 +1,9 @@
+{
+  "name": "v-violetconnect",
+  "version": "1.0.0",
+  "description": "VioletConnect patterns, AppContext, pre-registration flows, and merchant onboarding",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

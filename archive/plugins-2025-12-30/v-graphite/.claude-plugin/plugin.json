@@ -1,0 +1,9 @@
+{
+  "name": "v-graphite",
+  "version": "1.0.0",
+  "description": "Graphite CLI detection and stacked PR workflow management",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

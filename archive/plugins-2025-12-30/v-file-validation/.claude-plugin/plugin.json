@@ -1,0 +1,9 @@
+{
+  "name": "v-file-validation",
+  "version": "1.0.0",
+  "description": "Strict detection and removal of unrelated files before PR creation",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}

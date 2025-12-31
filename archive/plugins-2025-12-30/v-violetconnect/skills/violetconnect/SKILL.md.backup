@@ -1,0 +1,1353 @@
+---
+name: violetconnect
+description: VioletConnect patterns, AppContext, pre-registration flows, and merchant onboarding
+---
+
+# VioletConnect Code Patterns
+
+## Overview
+
+VioletConnect is the merchant onboarding application that handles OAuth flows for Shopify, BigCommerce, and WooCommerce integration.
+
+**Tech Stack:**
+- Next.js 12.2.5 with React 17.0.2
+- Redux Toolkit (NOT React Query)
+- axios via axiosWrapper (NOT vanilla axios)
+- SCSS modules
+- React Hook Form + Yup validation
+
+**ALL patterns in this document are MANDATORY when working on VioletConnect.**
+
+---
+
+## Critical Architecture Rules
+
+### 1. Use Redux, NOT Local React State (ADR-002)
+
+❌ **WRONG**:
+```typescript
+// hooks/usePreRegistration.ts
+import { useState } from 'react';
+import axios from 'axios';
+
+export function usePreRegistration() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const lookup = async (storeUrl: string) => {
+    setLoading(true);
+    const response = await axios.get('/api/pre-register/lookup', { params: { storeUrl } });
+    setData(response.data);
+    setLoading(false);
+  };
+
+  return { data, loading, lookup };
+}
+```
+
+✅ **CORRECT**:
+```typescript
+// redux/slices/preRegistration.ts
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axiosWrapper from '@/utils/axiosWrapper';
+
+export const lookupByStoreUrl = createAsyncThunk(
+  'preRegistration/lookupByStoreUrl',
+  async ({ storeUrl, appId }: { storeUrl: string; appId: number }) => {
+    try {
+      const response = await axiosWrapper({
+        url: '/api/pre-register/lookup',
+        method: 'GET',
+        params: { storeUrl, appId }
+      });
+      return { found: true, preRegistration: response.data };
+    } catch (error: any) {
+      if (error.response?.status === 404) {
+        return { found: false, preRegistration: null };
+      }
+      throw error;
+    }
+  }
+);
+
+const preRegistrationSlice = createSlice({
+  name: 'preRegistration',
+  initialState: {
+    current: null,
+    loading: false,
+    error: null,
+    found: false
+  },
+  reducers: {
+    reset: (state) => {
+      state.current = null;
+      state.loading = false;
+      state.error = null;
+      state.found = false;
+    }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(lookupByStoreUrl.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(lookupByStoreUrl.fulfilled, (state, action) => {
+        state.loading = false;
+        state.found = action.payload.found;
+        state.current = action.payload.preRegistration;
+      })
+      .addCase(lookupByStoreUrl.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Lookup failed';
+      });
+  }
+});
+
+export const { reset } = preRegistrationSlice.actions;
+export default preRegistrationSlice.reducer;
+```
+
+**Why**: Redux provides centralized state management, better debugging via DevTools, and persistence capabilities.
+
+---
+
+### 2. Use axiosWrapper, NOT Vanilla Axios (ADR-006)
+
+❌ **WRONG**:
+```typescript
+import axios from 'axios';
+
+const response = await axios.get('/api/pre-register/lookup', {
+  params: { store_url: storeUrl }
+});
+```
+
+✅ **CORRECT**:
+```typescript
+import axiosWrapper from '@/utils/axiosWrapper';
+
+const response = await axiosWrapper({
+  url: '/api/pre-register/lookup',
+  method: 'GET',
+  params: { storeUrl }  // camelCase - axiosWrapper converts to snake_case
+});
+```
+
+**Why axiosWrapper**:
+- Automatic camelCase ↔ snake_case conversion
+- Standardized error handling
+- Authentication header injection
+- Consistent request/response format
+- Built-in retry logic
+
+**axiosWrapper Parameters**:
+```typescript
+interface AxiosWrapperConfig {
+  url: string;
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  params?: object;  // Query parameters (camelCase)
+  data?: object;    // Request body (camelCase)
+  headers?: object; // Custom headers
+}
+```
+
+---
+
+### 3. API Routes are Lightweight Proxies ONLY (ADR-008)
+
+❌ **WRONG** - Business logic in API route:
+```typescript
+// pages/api/pre-register/lookup.ts
+export default async function handler(req, res) {
+  const { storeUrl, appId } = req.query;
+
+  try {
+    const response = await backendApi.get('/merchants/external/pre-register', {
+      params: { store_url: storeUrl, app_id: appId }
+    });
+
+    // ❌ NO - Don't transform data here
+    const transformed = {
+      ...response.data,
+      displayName: response.data.merchant_name,
+      url: response.data.store_url,
+      status: response.data.status === 'pending' ? 'PENDING' : 'ACTIVE'
+    };
+
+    res.status(200).json(transformed);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal error' });
+  }
+}
+```
+
+✅ **CORRECT** - Lightweight proxy:
+```typescript
+// pages/api/pre-register/lookup.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getAuthHeaders } from '@/utils/auth';
+import backendApi from '@/utils/backendApi';
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { storeUrl, appId } = req.query;
+
+  try {
+    // Pass through to backend - no transformation
+    const response = await backendApi.get('/merchants/external/pre-register', {
+      params: { store_url: storeUrl, app_id: appId },
+      headers: getAuthHeaders(req)
+    });
+
+    // Pass through response directly
+    res.status(response.status).json(response.data);
+  } catch (error: any) {
+    // Pass through error directly
+    res.status(error.response?.status || 500).json(
+      error.response?.data || { error: 'Internal Server Error' }
+    );
+  }
+}
+```
+
+**Why**: API layer should be thin proxy to backend. Business logic belongs in backend or client, not in Node.js API routes.
+
+**Exceptions**: User management and session handling (existing patterns).
+
+---
+
+### 4. Use AppContext for Shared Application State (ADR-007)
+
+AppContext already handles:
+- `appId` - Current application ID
+- `appAlias` - URL alias for the app
+- `merchantId` - Query param detection (**already implemented**)
+- `channelName` - Channel display name
+- Session and authentication state
+
+❌ **WRONG** - Re-implementing merchantId detection:
+```typescript
+// pages/[appAlias]/[[...catchall]].tsx
+function CatchallPage() {
+  const router = useRouter();
+  const merchantId = router.query.merchantId;  // ❌ DON'T - Already in AppContext
+
+  useEffect(() => {
+    if (merchantId) {
+      // This breaks existing functionality
+      dispatch(lookupByMerchantId(merchantId));
+    }
+  }, [merchantId]);
+}
+```
+
+✅ **CORRECT** - Extend AppContext:
+```typescript
+// contexts/AppContext.tsx
+const AppProvider = ({ children }: AppProviderProps) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  // Existing merchantId detection (already exists)
+  const merchantId = router.query.merchantId as string;
+
+  // Add pre-registration check
+  useEffect(() => {
+    if (merchantId && !isNaN(Number(merchantId))) {
+      dispatch(lookupByMerchantId(Number(merchantId)));
+    }
+  }, [merchantId, dispatch]);
+
+  return (
+    <AppContext.Provider value={{ /* ...existing values */ }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+```
+
+**AppContext Structure**:
+```typescript
+interface AppContextValue {
+  appId: number;
+  appAlias: string;
+  merchantId?: string;     // From query params
+  channelName: string;
+  isAuthenticated: boolean;
+  // ... other app-wide state
+}
+```
+
+**When to extend AppContext**:
+- Query parameter detection (e.g., merchantId, token)
+- Application-wide state changes
+- OAuth redirect handling
+- Session management
+
+**When NOT to use AppContext**:
+- Feature-specific state (use Redux)
+- Page-specific data (use component state)
+- Form data (use React Hook Form)
+
+---
+
+## Pre-Registration Flows
+
+VioletConnect supports three merchant onboarding flows:
+
+### Flow A: Email-First (Standard)
+1. User enters email → Creates session
+2. User selects platform (Shopify/BigCommerce/WooCommerce)
+3. User enters store URL
+4. Redirect to OAuth
+
+### Flow B: Store URL with Pre-Registration Lookup
+1. User enters store URL
+2. **Check pre-registration**: `GET /api/pre-register/lookup?storeUrl={url}&appId={id}`
+3. **If found**: Show confirmation → Redirect to OAuth (skip email step)
+4. **If not found**: Continue with email-first flow
+
+### Flow C: MerchantId Query Parameter
+1. User lands with `?merchantId={id}` in URL
+2. **AppContext detects merchantId** (already implemented)
+3. **Check pre-registration**: Dispatch `lookupByMerchantId(merchantId)`
+4. **If found**: Show confirmation → Redirect to OAuth (skip email + store URL)
+5. **If not found**: Show error (invalid link)
+
+---
+
+## Pre-Registration Redux Integration
+
+### State Structure
+
+```typescript
+// redux/slices/preRegistration.ts
+interface PreRegistrationState {
+  current: IPreRegistration | null;
+  loading: boolean;
+  error: string | null;
+  found: boolean;  // Distinguish 404 from error
+}
+```
+
+### Thunks
+
+```typescript
+// Lookup by store URL (Flow B)
+export const lookupByStoreUrl = createAsyncThunk(
+  'preRegistration/lookupByStoreUrl',
+  async ({ storeUrl, appId }: { storeUrl: string; appId: number }) => {
+    try {
+      const response = await axiosWrapper({
+        url: '/api/pre-register/lookup',
+        method: 'GET',
+        params: { storeUrl, appId }
+      });
+      return { found: true, preRegistration: response.data };
+    } catch (error: any) {
+      if (error.response?.status === 404) {
+        return { found: false, preRegistration: null };
+      }
+      throw error;
+    }
+  }
+);
+
+// Lookup by merchantId (Flow C)
+export const lookupByMerchantId = createAsyncThunk(
+  'preRegistration/lookupByMerchantId',
+  async (merchantId: number) => {
+    try {
+      const response = await axiosWrapper({
+        url: `/api/pre-register/${merchantId}`,
+        method: 'GET'
+      });
+      return { found: true, preRegistration: response.data };
+    } catch (error: any) {
+      if (error.response?.status === 404) {
+        return { found: false, preRegistration: null };
+      }
+      throw error;
+    }
+  }
+);
+```
+
+### Component Integration
+
+```typescript
+// pages/[appAlias]/shopify-url.tsx
+import { useDispatch, useSelector } from 'react-redux';
+import { lookupByStoreUrl } from '@/redux/slices/preRegistration';
+import PreRegFound from '@/components/PreRegistration/PreRegFound';
+
+function ShopifyUrlPage() {
+  const dispatch = useDispatch();
+  const { current, loading, found } = useSelector((state) => state.preRegistration);
+  const { appId } = useContext(AppContext);
+
+  const onStoreUrlSubmit = async (data: { storeUrl: string }) => {
+    // Check for pre-registration
+    const result = await dispatch(lookupByStoreUrl({
+      storeUrl: data.storeUrl,
+      appId
+    })).unwrap();
+
+    if (result.found) {
+      // Pre-registration found - component will show confirmation
+      return;
+    } else {
+      // Not found - continue normal flow (email step)
+      continueNormalFlow(data.storeUrl);
+    }
+  };
+
+  if (found && current) {
+    return (
+      <PreRegFound
+        preRegistration={current}
+        onConnect={() => {
+          window.location.href = current.installLink;
+        }}
+        loading={loading}
+        channelName={channelName}
+      />
+    );
+  }
+
+  // Normal store URL form
+  return <StoreUrlForm onSubmit={onStoreUrlSubmit} />;
+}
+```
+
+---
+
+## OAuth Integration Patterns
+
+### OAuth Redirect Flow
+
+```typescript
+// When pre-registration found, redirect to install link
+const handleConnect = () => {
+  // No need for loading state - navigating away immediately
+  window.location.href = preRegistration.installLink;
+};
+```
+
+### Install Link Format
+
+Backend provides the OAuth URL:
+```typescript
+interface IPreRegistration {
+  merchantId: number;
+  merchantName: string;
+  storeUrl: string;
+  platform: 'shopify' | 'bigcommerce' | 'woocommerce';
+  installLink: string;  // Full OAuth URL with state/redirect params
+  status: 'pending' | 'active';
+}
+```
+
+---
+
+## Asset Handling
+
+### SVG Icons - Use SVGR
+
+❌ **WRONG** - Inline SVG in JSX:
+```typescript
+<div>
+  <svg viewBox="0 0 24 24">
+    <path d="M8 12l2.5 2.5L16 9" />
+  </svg>
+</div>
+```
+
+✅ **CORRECT** - SVGR Import:
+```typescript
+// 1. Create SVG file: svg/CheckCircle.svg
+// svg/CheckCircle.svg content:
+// <svg viewBox="0 0 24 24">
+//   <path d="M8 12l2.5 2.5L16 9" />
+// </svg>
+
+// 2. Import with SVGR
+import CheckCircle from '@/svg/CheckCircle.svg';
+
+function Component() {
+  return (
+    <div>
+      <CheckCircle className={styles.icon} />
+    </div>
+  );
+}
+```
+
+**Why**: SVGR provides type safety, reusability, and smaller bundle size.
+
+---
+
+## Form Handling with React Hook Form
+
+```typescript
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const schema = yup.object({
+  storeUrl: yup.string()
+    .required('Store URL is required')
+    .url('Must be a valid URL')
+}).required();
+
+function StoreUrlForm({ onSubmit }) {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('storeUrl')} />
+      {errors.storeUrl && <span>{errors.storeUrl.message}</span>}
+      <button type="submit">Continue</button>
+    </form>
+  );
+}
+```
+
+---
+
+## Component Patterns
+
+### PreRegFound Component (Flow B/C Success)
+
+```typescript
+interface PreRegFoundProps {
+  preRegistration: IPreRegistration;
+  onConnect: () => void;
+  loading?: boolean;
+  channelName?: string;
+}
+
+const PreRegFound = ({
+  preRegistration,
+  onConnect,
+  loading = false,
+  channelName
+}: PreRegFoundProps) => {
+  return (
+    <div className={styles.container}>
+      <CheckCircleIcon className={styles.checkIcon} />
+
+      <h2 className={cx('pageHeader', styles.title)}>
+        Your store is already set up!
+      </h2>
+
+      <p className={styles.subtitle}>
+        We found your pre-registration. Click below to connect your Shopify store.
+      </p>
+
+      <div className={styles.storeCard}>
+        <StoreIcon className={styles.storeIcon} />
+        <div className={styles.storeDetails}>
+          <div className={styles.merchantName}>{preRegistration.merchantName}</div>
+          <div className={styles.storeUrl}>{preRegistration.storeUrl}</div>
+        </div>
+      </div>
+
+      <VioletButton
+        className={styles.connectButton}
+        text="Connect to Shopify"
+        onClick={onConnect}
+        loading={loading}
+        disabled={loading}
+        type="button"
+      />
+
+      <p className={styles.helpText}>
+        Not your store? Contact {channelName || 'your channel partner'} for assistance.
+      </p>
+    </div>
+  );
+};
+```
+
+### PreRegError Component (Flow C Failure)
+
+```typescript
+interface PreRegErrorProps {
+  message: string;
+  channelName?: string;
+}
+
+const PreRegError = ({ message, channelName }: PreRegErrorProps) => {
+  return (
+    <div className={styles.errorContainer}>
+      <AlertIcon className={styles.errorIcon} />
+
+      <h2 className={cx('pageHeader', styles.title)}>
+        We couldn't find your registration
+      </h2>
+
+      <p className={styles.message}>{message}</p>
+
+      <p className={styles.helpText}>
+        Please contact {channelName || 'your channel partner'} for a new registration link.
+      </p>
+    </div>
+  );
+};
+```
+
+---
+
+## Testing Patterns
+
+### Redux Thunk Testing
+
+```typescript
+import { lookupByStoreUrl } from '@/redux/slices/preRegistration';
+import axiosWrapper from '@/utils/axiosWrapper';
+
+jest.mock('@/utils/axiosWrapper');
+
+describe('preRegistration thunks', () => {
+  it('should handle successful lookup', async () => {
+    const mockData = { merchantId: 123, storeUrl: 'test.myshopify.com' };
+    (axiosWrapper as jest.Mock).mockResolvedValue({ data: mockData });
+
+    const result = await dispatch(lookupByStoreUrl({
+      storeUrl: 'test.myshopify.com',
+      appId: 1
+    })).unwrap();
+
+    expect(result.found).toBe(true);
+    expect(result.preRegistration).toEqual(mockData);
+  });
+
+  it('should handle 404 as not found', async () => {
+    (axiosWrapper as jest.Mock).mockRejectedValue({
+      response: { status: 404 }
+    });
+
+    const result = await dispatch(lookupByStoreUrl({
+      storeUrl: 'notfound.myshopify.com',
+      appId: 1
+    })).unwrap();
+
+    expect(result.found).toBe(false);
+    expect(result.preRegistration).toBeNull();
+  });
+});
+```
+
+### Component Testing
+
+```typescript
+import { render, screen } from '@testing-library/react';
+import PreRegFound from '@/components/PreRegistration/PreRegFound';
+
+describe('PreRegFound', () => {
+  const mockPreReg = {
+    merchantId: 123,
+    merchantName: 'Test Store',
+    storeUrl: 'test.myshopify.com',
+    platform: 'shopify',
+    installLink: 'https://shopify.com/install',
+    status: 'pending'
+  };
+
+  it('displays merchant name and store URL', () => {
+    render(
+      <PreRegFound
+        preRegistration={mockPreReg}
+        onConnect={jest.fn()}
+      />
+    );
+
+    expect(screen.getByText('Test Store')).toBeInTheDocument();
+    expect(screen.getByText('test.myshopify.com')).toBeInTheDocument();
+  });
+
+  it('calls onConnect when button clicked', () => {
+    const onConnect = jest.fn();
+    render(
+      <PreRegFound
+        preRegistration={mockPreReg}
+        onConnect={onConnect}
+      />
+    );
+
+    screen.getByText('Connect to Shopify').click();
+    expect(onConnect).toHaveBeenCalled();
+  });
+});
+```
+
+---
+
+## Common Anti-Patterns
+
+### ❌ DON'T: Modify Catchall Route
+
+```typescript
+// pages/[appAlias]/[[...catchall]].tsx
+// ❌ NEVER add feature-specific logic here - it breaks existing functionality
+function CatchallPage() {
+  useEffect(() => {
+    // ❌ DON'T - This is for 404 handling only
+    if (router.query.merchantId) {
+      dispatch(lookupByMerchantId(router.query.merchantId));
+    }
+  }, []);
+}
+```
+
+**Why**: The catchall route handles undefined pages. Adding feature logic breaks 404 behavior and graceful fallbacks.
+
+**Instead**: Use AppContext for query param detection.
+
+---
+
+### ❌ DON'T: Set Loading State Before Navigation
+
+```typescript
+// ❌ WRONG
+const handleConnect = () => {
+  setConnecting(true);  // ❌ Unnecessary - page unloads immediately
+  window.location.href = installLink;
+};
+```
+
+**Why**: The page navigates away immediately. The state change has no effect.
+
+---
+
+### ❌ DON'T: Use snake_case in Client Code
+
+```typescript
+// ❌ WRONG
+const params = { store_url: storeUrl, app_id: appId };
+```
+
+✅ **CORRECT**:
+```typescript
+const params = { storeUrl, appId };  // axiosWrapper converts to snake_case
+```
+
+---
+
+## Quick Reference: ADR Summary
+
+| ADR | Rule | Tool/Pattern |
+|-----|------|--------------|
+| ADR-002 | Use Redux for state management | `createAsyncThunk`, `createSlice` |
+| ADR-006 | Use axiosWrapper for HTTP | `axiosWrapper({ url, method, params })` |
+| ADR-007 | Use AppContext for app state | Extend `AppContext`, don't modify catchall |
+| ADR-008 | API routes are lightweight proxies | Pass through requests/responses only |
+
+---
+
+## File Structure
+
+```
+VioletConnect/
+├── redux/
+│   └── slices/
+│       └── preRegistration.ts      # Redux slice + thunks
+├── components/
+│   └── PreRegistration/
+│       ├── PreRegFound.tsx          # Flow B/C success UI
+│       ├── PreRegError.tsx          # Flow C failure UI
+│       └── PreRegConfirmation.tsx   # Flow C confirmation
+├── contexts/
+│   └── AppContext.tsx               # App-wide state (extend here)
+├── pages/
+│   ├── api/
+│   │   └── pre-register/
+│   │       ├── lookup.ts            # Lookup by store URL
+│   │       └── [merchantId].ts      # Lookup by merchantId
+│   └── [appAlias]/
+│       ├── shopify-url.tsx          # Flow B integration point
+│       └── index.tsx                # Flow C integration point (AppContext)
+├── utils/
+│   ├── axiosWrapper.ts              # HTTP client (use this)
+│   └── backendApi.ts                # Backend API client
+└── svg/
+    ├── CheckCircle.svg              # Success icon
+    └── Store.svg                    # Store icon
+```
+
+---
+
+## Related Documentation
+
+- **Architecture Spec**: `prism-brain/product/specs/merchant-pre-registration/04-architecture.md`
+- **Implementation Plan**: `prism-brain/product/specs/merchant-pre-registration/05-implementation.md`
+- **PR Guides**: `prism-brain/product/specs/merchant-pre-registration/guides/violet-connect/`
+- **API Documentation**: `prism-brain/systems/merchant-service/pre-registration-api.md`
+
+---
+---
+
+# TIER 2: Platform Integration Patterns
+
+This section covers **WHAT VioletConnect does** for each e-commerce platform - the functional patterns, OAuth flows, and platform-specific merchant onboarding variations.
+
+---
+
+## Overview: VioletConnect's Role
+
+VioletConnect is Violet's **merchant onboarding application**. It handles:
+
+1. **OAuth flows** for connecting merchant stores to channels
+2. **Platform-specific authentication** (Shopify, BigCommerce, WooCommerce, etc.)
+3. **Pre-registration detection** (see Tier 1 patterns above)
+4. **Commission & payout configuration**
+5. **Post-OAuth merchant setup**
+
+**Supported Platforms**: 43 platforms via `Merchant.Platform` enum (Shopify, BigCommerce, WooCommerce, Magento, etc.)
+
+**Key Integration Points**:
+- **MerchantService**: Creates merchant records, stores credentials
+- **Platform APIs**: Direct OAuth with Shopify/BC/WC APIs
+- **Channel Apps**: Each channel has an `appId` and `appAlias` for subdomain routing
+
+---
+
+## Shopify OAuth Flow
+
+### Standard Flow (No Pre-Registration)
+
+```
+1. Merchant lands on VioletConnect: connect.violet.io/{appAlias}/platforms/shopify
+2. Merchant enters email → Creates session
+3. Merchant enters store URL (e.g., "mystore.myshopify.com")
+4. VioletConnect validates store URL format
+5. VioletConnect redirects to Shopify OAuth:
+   - URL: https://{store}.myshopify.com/admin/oauth/authorize
+   - Params: client_id, scope, redirect_uri, state
+6. Merchant approves app in Shopify admin
+7. Shopify redirects back to VioletConnect callback:
+   - URL: connect.violet.io/{appAlias}/platforms/shopify/callback
+   - Params: code, shop, state
+8. VioletConnect exchanges code for access_token (server-side)
+9. VioletConnect creates merchant record in MerchantService
+10. Merchant completes commission/payout setup
+11. Merchant redirected to success page
+```
+
+### With Pre-Registration (Flow A)
+
+```
+1. Channel pre-registers merchant with Shopify credentials
+2. Channel sends Shopify install link directly to merchant:
+   - URL: https://{store}.myshopify.com/admin/oauth/authorize?client_id={id}&redirect_uri={uri}
+3. Merchant clicks install link (bypasses VioletConnect)
+4. Merchant approves in Shopify admin
+5. Shopify redirects to VioletConnect callback with code
+6. VioletConnect detects no active session
+7. VioletConnect looks up pre-registration by store_url (from state)
+8. If found: Resume flow with pre-stored credentials
+9. If not found: Error (no session)
+```
+
+### Shopify-Specific Implementation Details
+
+**Dynamic Routing**: `pages/[appAlias]/platforms/shopify/index.tsx`
+
+**Key Files**:
+```typescript
+// pages/[appAlias]/platforms/shopify/index.tsx
+// Handles store URL entry and OAuth initiation
+
+// pages/[appAlias]/platforms/shopify/callback.tsx
+// Handles OAuth callback from Shopify
+
+// utils/shopify/oauth.ts
+// OAuth URL construction and token exchange
+
+// utils/shopify/validation.ts
+// Store URL validation (.myshopify.com format)
+```
+
+**Shopify OAuth Parameters**:
+```typescript
+interface ShopifyOAuthParams {
+  client_id: string;        // Shopify app client ID
+  scope: string;            // Permissions (read_products, write_orders, etc.)
+  redirect_uri: string;     // VioletConnect callback URL
+  state: string;            // CSRF token + session identifier
+  grant_options?: string[]; // ['per-user'] for user-level access
+}
+```
+
+**Access Token Exchange**:
+```typescript
+// Server-side only (pages/api/shopify/token-exchange.ts)
+POST https://{shop}.myshopify.com/admin/oauth/access_token
+Body: {
+  client_id: string,
+  client_secret: string,
+  code: string
+}
+
+Response: {
+  access_token: string,
+  scope: string
+}
+```
+
+**Shopify-Specific Validations**:
+- Store URL must match `*.myshopify.com` format
+- Handle Shopify Plus custom domains
+- Detect development stores (`*.myshopify.com` vs custom)
+
+---
+
+## BigCommerce OAuth Flow
+
+### Standard Flow
+
+```
+1. Merchant lands on VioletConnect: connect.violet.io/{appAlias}/platforms/bigcommerce
+2. Merchant enters email → Creates session
+3. Merchant enters store URL (e.g., "https://store-abc123.mybigcommerce.com")
+4. VioletConnect validates store URL format
+5. VioletConnect redirects to BigCommerce OAuth:
+   - URL: https://login.bigcommerce.com/oauth2/authorize
+   - Params: client_id, scope, redirect_uri, state
+6. Merchant approves app in BigCommerce admin
+7. BigCommerce redirects back to VioletConnect callback:
+   - URL: connect.violet.io/{appAlias}/platforms/bigcommerce/callback
+   - Params: code, scope, context
+8. VioletConnect exchanges code for access_token (server-side)
+9. VioletConnect creates merchant record with store_hash
+10. Merchant completes commission/payout setup
+11. Merchant redirected to success page
+```
+
+### BigCommerce Embedded App Flow
+
+**Key Difference**: BigCommerce supports embedded apps that load within the BC admin iframe.
+
+```
+1. Merchant installs app from BigCommerce App Marketplace
+2. BigCommerce loads VioletConnect in iframe: /bc-embedded/load
+3. VioletConnect receives signed JWT in payload
+4. VioletConnect validates JWT signature
+5. JWT contains: store_hash, user.id, user.email, context
+6. VioletConnect auto-creates session (no manual login)
+7. Merchant is already authenticated
+8. Continue with commission/payout setup
+```
+
+**Embedded App Implementation**:
+```typescript
+// pages/bc-embedded/load.tsx
+// Handles BigCommerce iframe load with JWT
+
+// utils/bigcommerce/jwt.ts
+// JWT validation and decoding
+
+interface BigCommerceJWT {
+  aud: string;           // client_id
+  iss: string;           // BigCommerce
+  iat: number;           // Issued at
+  nbf: number;           // Not before
+  exp: number;           // Expiration
+  jti: string;           // JWT ID
+  sub: string;           // store_hash
+  user: {
+    id: number;
+    email: string;
+    locale: string;
+  };
+  owner: {
+    id: number;
+    email: string;
+  };
+  url: string;           // Store URL
+  channel_id: number;
+}
+```
+
+### BigCommerce-Specific Details
+
+**Dynamic Routing**: `pages/[appAlias]/platforms/bigcommerce/index.tsx`
+
+**Store Hash vs Store URL**:
+- BigCommerce uses `store_hash` (e.g., `abc123`) as primary identifier
+- Store URL is secondary: `https://store-{hash}.mybigcommerce.com`
+- API calls use store_hash: `https://api.bigcommerce.com/stores/{hash}/v3/...`
+
+**OAuth Parameters**:
+```typescript
+interface BigCommerceOAuthParams {
+  client_id: string;
+  scope: string;           // "store_v2_products store_v2_orders" (space-separated)
+  redirect_uri: string;
+  state: string;
+  context?: string;        // "stores/{hash}" for re-auth
+}
+```
+
+**Access Token Exchange**:
+```typescript
+POST https://login.bigcommerce.com/oauth2/token
+Body: {
+  client_id: string,
+  client_secret: string,
+  code: string,
+  scope: string,
+  grant_type: "authorization_code",
+  redirect_uri: string,
+  context: string
+}
+
+Response: {
+  access_token: string,
+  scope: string,
+  user: {
+    id: number,
+    username: string,
+    email: string
+  },
+  context: string        // "stores/{hash}"
+}
+```
+
+---
+
+## WooCommerce OAuth Flow
+
+### WooCommerce REST API Authentication
+
+**Key Difference**: WooCommerce doesn't have centralized OAuth like Shopify/BigCommerce. Authentication is per-store via REST API keys.
+
+```
+1. Merchant lands on VioletConnect: connect.violet.io/{appAlias}/platforms/woocommerce
+2. Merchant enters email → Creates session
+3. Merchant enters store URL (e.g., "https://mystore.com")
+4. Merchant enters WooCommerce REST API credentials:
+   - Consumer Key (e.g., "ck_abc123...")
+   - Consumer Secret (e.g., "cs_xyz789...")
+5. VioletConnect validates credentials by test API call
+6. If valid: Creates merchant record with credentials
+7. Merchant completes commission/payout setup
+8. Merchant redirected to success page
+```
+
+### WooCommerce-Specific Details
+
+**No Centralized OAuth**: Each WooCommerce store is self-hosted, so no central OAuth server exists.
+
+**Credential Entry Flow**:
+```typescript
+// pages/[appAlias]/platforms/woocommerce/index.tsx
+interface WooCommerceCredentials {
+  storeUrl: string;        // WordPress site URL
+  consumerKey: string;     // ck_...
+  consumerSecret: string;  // cs_...
+}
+
+// Validation: Test API call
+GET {storeUrl}/wp-json/wc/v3/system_status
+Headers: {
+  Authorization: Basic base64(consumerKey:consumerSecret)
+}
+```
+
+**Key Generation Instructions**:
+VioletConnect must guide merchants to generate keys:
+1. WordPress Admin → WooCommerce → Settings → Advanced → REST API
+2. Click "Add Key"
+3. Description: "Violet Integration"
+4. Permissions: Read/Write
+5. Copy Consumer Key and Consumer Secret
+
+**WooCommerce REST API Authentication**:
+```typescript
+// Server-side API calls use Basic Auth
+const auth = Buffer.from(`${consumerKey}:${consumerSecret}`).toString('base64');
+
+axios.get(`${storeUrl}/wp-json/wc/v3/products`, {
+  headers: {
+    Authorization: `Basic ${auth}`
+  }
+});
+```
+
+---
+
+## Platform Comparison Table
+
+| Feature | Shopify | BigCommerce | WooCommerce |
+|---------|---------|-------------|-------------|
+| **OAuth Type** | Centralized OAuth 2.0 | Centralized OAuth 2.0 | REST API Keys |
+| **Store Identifier** | Store URL (*.myshopify.com) | Store Hash (abc123) | Store URL (any domain) |
+| **Credential Storage** | access_token | access_token + store_hash | consumerKey + consumerSecret |
+| **Token Refresh** | No (long-lived) | No (long-lived) | No (API keys don't expire) |
+| **Embedded App** | No | Yes (iframe + JWT) | No |
+| **Pre-Registration** | Supported (Flow A, B, C) | Supported (Flow B, C) | Supported (Flow B, C) |
+| **Callback URL** | /platforms/shopify/callback | /platforms/bigcommerce/callback | N/A |
+| **Validation** | Store URL format | Test API call | Test API call |
+
+---
+
+## Pre-Registration Integration by Platform
+
+### Shopify Pre-Registration
+
+**Flow A (Direct Install Link)**:
+- Channel provides Shopify install link with pre-registered credentials
+- Merchant clicks → Shopify OAuth → Callback to VioletConnect
+- VioletConnect looks up by store_url from OAuth state
+- Pre-registration must include: `clientId`, `secret`, `installLink`
+
+**Flow B (Store URL Lookup)**:
+- Merchant enters store URL in VioletConnect
+- VioletConnect checks: `GET /api/pre-register/lookup?storeUrl={url}`
+- If found: Skip email, show confirmation, redirect to OAuth
+- Pre-registration must include: `merchantName`, `storeUrl`, `installLink`
+
+**Flow C (MerchantId Link)**:
+- Channel sends: `connect.violet.io/{appAlias}?merchantId={id}`
+- AppContext detects merchantId, looks up pre-registration
+- If found: Skip email + store URL, show confirmation, redirect to OAuth
+- Pre-registration must include: `merchantId`, `merchantName`, `storeUrl`, `installLink`
+
+### BigCommerce Pre-Registration
+
+**Flow B & C Only** (no Flow A - BC doesn't support direct install links)
+
+**Flow B (Store URL Lookup)**:
+- Merchant enters store URL
+- VioletConnect extracts store_hash from URL or makes test API call
+- Looks up pre-registration by store_url
+- If found: Show confirmation, redirect to BC OAuth
+
+**Flow C (MerchantId Link)**:
+- Channel sends merchantId link
+- AppContext looks up pre-registration
+- If found: Show confirmation, redirect to BC OAuth
+
+### WooCommerce Pre-Registration
+
+**Flow B & C Only** (no Flow A - WC has no OAuth)
+
+**Flow B (Store URL Lookup)**:
+- Merchant enters store URL
+- VioletConnect checks for pre-registration
+- If found: Pre-fill API credentials, show confirmation
+- Merchant still must approve (security)
+
+**Flow C (MerchantId Link)**:
+- Channel sends merchantId link
+- AppContext looks up pre-registration
+- If found: Pre-fill API credentials, merchant confirms
+
+**WooCommerce Constraint**: Pre-registration can store API keys, but merchant should still review before submitting (security best practice).
+
+---
+
+## Platform-Specific Components
+
+### Shopify Components
+
+```typescript
+// components/Shopify/StoreUrlInput.tsx
+// Validates *.myshopify.com format
+
+// components/Shopify/OAuthRedirect.tsx
+// Constructs Shopify OAuth URL
+
+// components/Shopify/CallbackHandler.tsx
+// Handles Shopify OAuth callback
+```
+
+### BigCommerce Components
+
+```typescript
+// components/BigCommerce/StoreUrlInput.tsx
+// Accepts any BC store URL format
+
+// components/BigCommerce/EmbeddedAppLoader.tsx
+// Handles BC embedded app JWT validation
+
+// components/BigCommerce/OAuthRedirect.tsx
+// Constructs BC OAuth URL
+```
+
+### WooCommerce Components
+
+```typescript
+// components/WooCommerce/StoreUrlInput.tsx
+// Accepts any WordPress site URL
+
+// components/WooCommerce/CredentialForm.tsx
+// API key entry with guidance
+
+// components/WooCommerce/CredentialValidator.tsx
+// Tests API credentials with test call
+```
+
+---
+
+## Multi-Platform Architecture
+
+VioletConnect uses **dynamic routing** to support all platforms:
+
+```
+pages/[appAlias]/platforms/[platform]/index.tsx
+```
+
+**Platform Detection**:
+```typescript
+// contexts/AppContext.tsx
+const platform = router.query.platform as Merchant.Platform;
+
+// Render platform-specific flow
+switch (platform) {
+  case 'shopify':
+    return <ShopifyFlow />;
+  case 'bigcommerce':
+    return <BigCommerceFlow />;
+  case 'woocommerce':
+    return <WooCommerceFlow />;
+  default:
+    return <UnsupportedPlatformError />;
+}
+```
+
+**Shared vs Platform-Specific**:
+- **Shared**: Email entry, commission/payout, success page
+- **Platform-Specific**: Store URL format, OAuth redirect, credential validation
+
+---
+
+## Error Handling by Platform
+
+### Shopify Errors
+
+| Error | Cause | VioletConnect Handling |
+|-------|-------|------------------------|
+| Invalid store URL | Wrong format | Show inline error: "Must be *.myshopify.com" |
+| Store not found | Store doesn't exist | Shopify returns error on OAuth redirect |
+| OAuth denied | Merchant clicks "Cancel" | Callback receives `error=access_denied` |
+| Invalid credentials | Wrong client_id/secret | Token exchange fails, show error |
+
+### BigCommerce Errors
+
+| Error | Cause | VioletConnect Handling |
+|-------|-------|------------------------|
+| Invalid store URL | Wrong format | Test API call fails, show error |
+| Invalid JWT | Tampered payload | Signature validation fails, show error |
+| OAuth denied | Merchant clicks "Cancel" | Callback receives `error=access_denied` |
+| Store hash mismatch | Wrong store_hash | API calls return 401, show error |
+
+### WooCommerce Errors
+
+| Error | Cause | VioletConnect Handling |
+|-------|-------|------------------------|
+| Invalid store URL | Not a WP site | Test API call fails (404), show error |
+| Invalid credentials | Wrong keys | Test API call returns 401, show error |
+| WC not installed | Store has no WooCommerce | API endpoint missing, show error |
+| Insufficient permissions | Keys are read-only | API call fails on write operation |
+
+---
+
+## Testing Platform Integrations
+
+### Shopify Testing
+
+```bash
+# Development stores for testing
+# Create at: partners.shopify.com
+mytest-store.myshopify.com
+
+# Test OAuth flow
+npm run test:e2e -- --grep "Shopify OAuth"
+
+# Mock Shopify responses
+// __tests__/integrations/shopify.test.ts
+jest.mock('axios');
+```
+
+### BigCommerce Testing
+
+```bash
+# Sandbox stores for testing
+# Create at: devtools.bigcommerce.com
+
+# Test embedded app
+npm run test:e2e -- --grep "BigCommerce embedded"
+
+# Test JWT validation
+// __tests__/integrations/bigcommerce-jwt.test.ts
+```
+
+### WooCommerce Testing
+
+```bash
+# Local WordPress + WooCommerce
+docker-compose up wordpress
+
+# Test credential validation
+npm run test:e2e -- --grep "WooCommerce credentials"
+```
+
+---
+
+## Platform-Specific Configuration
+
+### Environment Variables
+
+```bash
+# Shopify
+SHOPIFY_CLIENT_ID=abc123
+SHOPIFY_CLIENT_SECRET=xyz789
+SHOPIFY_SCOPES=read_products,write_orders,read_customers
+
+# BigCommerce
+BIGCOMMERCE_CLIENT_ID=def456
+BIGCOMMERCE_CLIENT_SECRET=uvw012
+BIGCOMMERCE_SCOPES=store_v2_products store_v2_orders
+BIGCOMMERCE_AUTH_CALLBACK=https://connect.violet.io/auth/bigcommerce/callback
+
+# WooCommerce
+# No central credentials - per-merchant keys only
+```
+
+### Channel Configuration
+
+Each channel (appId) can support different platforms:
+
+```typescript
+interface ChannelConfig {
+  appId: number;
+  appAlias: string;
+  supportedPlatforms: Merchant.Platform[];
+  shopifyClientId?: string;
+  bigcommerceClientId?: string;
+  // ... platform-specific config
+}
+```
+
+---
+
+## Related Documentation
+
+### Platform-Specific Docs
+- **Shopify Integration**: `ecom-integrations-brain/integrations/shopify/`
+- **BigCommerce Integration**: `ecom-integrations-brain/integrations/bigcommerce/`
+- **WooCommerce Integration**: `ecom-integrations-brain/integrations/woocommerce/`
+
+### VioletConnect System Docs
+- **Merchant Onboarding Flow**: `prism-brain/systems/violet-connect/merchant-onboarding-flow.md`
+- **Component Inventory**: `prism-brain/systems/violet-connect/component-inventory.md`
+
+### violet-ai-plugins
+- **v-shopify**: Shopify API patterns and integration details
+- **v-bigcommerce**: BigCommerce API patterns and embedded app handling
+- **v-woocommerce**: WooCommerce REST API patterns

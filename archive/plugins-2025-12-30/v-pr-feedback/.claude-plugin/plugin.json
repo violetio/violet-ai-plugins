@@ -1,0 +1,9 @@
+{
+  "name": "v-pr-feedback",
+  "version": "1.0.0",
+  "description": "Training-first PR review loop with extraction, learning integration, and code fixes",
+  "author": {
+    "name": "Violet Platform Team",
+    "email": "platform@violet.io"
+  }
+}
