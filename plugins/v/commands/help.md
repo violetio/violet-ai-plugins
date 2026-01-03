@@ -40,6 +40,9 @@ When violet-ai-plugins updates, run: `/plugin marketplace update violet`
 | `/v:feature` | Run the full feature workflow (Discovery → Review) |
 | `/v:discovery` | Iterate on Discovery phase only |
 | `/v:define` | Iterate on Definition phase only |
+| `/v:rca` | Conduct root cause analysis with three-test isolation |
+| `/v:convo-exit` | End conversation with debrief, feedback, and knowledge capture |
+| `/v:convo-capture` | Save mid-conversation context for continuity or handoff |
 | `/v:help` | Show this help |
 
 ---
@@ -86,4 +89,4 @@ The V workflow uses specialized skills for different tasks:
 
 **Plugin Info:**
 - Repository: https://github.com/violetio/violet-ai-plugins
-- Current version: 0.0.3
+- Current version: 0.0.6
